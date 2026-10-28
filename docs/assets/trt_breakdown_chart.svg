@@ -11,7 +11,7 @@
   </defs>
 
   <text x="30" y="35" fill="#f1f5f9" font-size="16" font-weight="700">TensorRT Profiling: Where Does GPU Execution Time Actually Go?</text>
-  <text x="30" y="55" fill="#94a3b8" font-size="12">197 Compiled TensorRT Layers Profiled at Batch 1 | RTX 3060 Laptop GPU (FP32) | Total Time: 6.90 ms</text>
+  <text x="30" y="55" fill="#94a3b8" font-size="12">197 Compiled TensorRT Layers Profiled at Batch 1 | NVIDIA GPU (FP32) | Total Time: 6.90 ms</text>
 
   <text x="30" y="90" fill="#cbd5e1" font-size="13" font-weight="600">TensorRT Engine Layer Composition</text>
   

@@ -11,7 +11,7 @@
   </defs>
 
   <text x="30" y="35" fill="#f1f5f9" font-size="16" font-weight="700">ONNX Runtime CUDA Latency (ms) — Isolated Graph Compiler Impact</text>
-  <text x="30" y="55" fill="#94a3b8" font-size="12">RTX 3060 Laptop GPU | FP32 | Seq Length 128 | Runtime Graph Optimizer OFF (Shows True Pass Impact)</text>
+  <text x="30" y="55" fill="#94a3b8" font-size="12">NVIDIA GPU | FP32 | Seq Length 128 | Runtime Graph Optimizer OFF (Shows True Pass Impact)</text>
 
   <!-- Legend -->
   <rect x="580" y="25" width="16" height="16" rx="4" fill="url(#orig-grad)"/>

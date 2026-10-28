@@ -45,7 +45,7 @@ FuseRT solves this in two deliberate phases:
 
 ## 🏆 Key Headline Achievements
 
-All benchmarks performed on an **NVIDIA GeForce RTX 3060 Laptop GPU (6 GB VRAM)** using standard **FP32 precision**, sequence length 128, and BERT-base (110M parameters).
+All benchmarks performed on an **NVIDIA GPU** using standard **FP32 precision**, sequence length 128, and BERT-base (110M parameters).
 
 | Metric | Before (Raw Model) | After (FuseRT) | Real-World Impact |
 |:---|:---:|:---:|:---|
@@ -106,7 +106,7 @@ graph LR
 ![ONNX Runtime Latency Comparison](docs/assets/ort_latency_chart.svg)
 
 #### 1. ONNX Runtime CUDA (FP32)
-*p50 latency in milliseconds, RTX 3060 Laptop GPU, Sequence Length 128:*
+*p50 latency in milliseconds, NVIDIA GPU, Sequence Length 128:*
 
 | Batch Size | Original Export (ORT Optimizer Off) | FuseRT Optimized (ORT Optimizer Off) | Speedup Factor | Original (ORT Default On) | FuseRT (ORT Default On) |
 |:---:|:---:|:---:|:---:|:---:|:---:|
