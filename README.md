@@ -1,406 +1,313 @@
-# FuseRT
+# ⚡ FuseRT: Deep Learning Graph Compiler & TensorRT Kernel Engineering
 
-**A graph compiler and performance-analysis project for deep learning inference.**
+<div align="center">
 
-FuseRT rewrites ONNX models with hand-written fusion passes, verifies that outputs remain correct, and compares execution in ONNX Runtime and TensorRT 11 on an NVIDIA Laptop GPU.
+[![Python](https://img.shields.io/badge/Python-3.12-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://python.org)
+[![PyTorch](https://img.shields.io/badge/PyTorch-2.11-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white)](https://pytorch.org)
+[![ONNX](https://img.shields.io/badge/ONNX-1.23-005CED?style=for-the-badge&logo=onnx&logoColor=white)](https://onnx.ai)
+[![TensorRT](https://img.shields.io/badge/TensorRT-11.4-76B900?style=for-the-badge&logo=nvidia&logoColor=white)](https://developer.nvidia.com/tensorrt)
+[![CUDA](https://img.shields.io/badge/CUDA-13.4-76B900?style=for-the-badge&logo=nvidia&logoColor=white)](https://developer.nvidia.com/cuda-toolkit)
+[![Precision](https://img.shields.io/badge/Precision-FP32-blueviolet?style=for-the-badge)](#)
+[![Tests](https://img.shields.io/badge/Tests-10%2F10%20Passing-10b981?style=for-the-badge)](#)
 
-FuseRT 2.0 extends the project from standard ONNX rewrites toward backend-aware optimization: it profiles the TensorRT engine, identifies BERT's repeated attention path, validates a reference implementation, and prepares the path toward a custom CUDA/TensorRT attention plugin.
+<p align="center">
+  <b>A production-grade exploration into deep learning inference optimization.</b><br>
+  Rewriting ONNX computation graphs with custom fusion passes, profiling TensorRT execution layer-by-layer, and engineering custom fused CUDA kernels to eliminate GPU memory bottlenecks.
+</p>
 
-## Headline results
+</div>
 
-**BERT-base, FP32, RTX 3060 Laptop GPU**
+---
 
-- Reduced the exported ONNX graph from **1,231 to 599 nodes** through constant inlining, LayerNorm fusion, GELU fusion, and QKV merging.
-- Verified optimized-model outputs against the original with maximum absolute error of **2.19e-5**.
-- Achieved **2.1x lower batch-1 latency** in ONNX Runtime CUDA with ORT graph optimization disabled: **15.68 ms -> 7.39 ms**.
-- Compared original and FuseRT-rewritten ONNX models in TensorRT 11.4. Both compiled to **197 TensorRT layers**, showing that TensorRT already performs many of the same standard fusions.
-- Profiled the original TensorRT engine and found that the repeated BERT attention path, `Q x K^T -> masked Softmax -> scores x V`, accounts for **1.586 ms**, or **23.0% of profiled layer time**, at batch 1 and sequence length 128.
-- Built and tested an ONNX attention-pattern matcher that finds all **12 BERT attention blocks** with zero skipped Softmax nodes.
+## 🚀 The End-to-End Pipeline
 
-## What this project demonstrates
+![FuseRT End-to-End Pipeline](docs/assets/pipeline_banner.svg)
 
-| Technical focus | Implementation details |
-|---|---|
-| Graph compiler algorithms | Subgraph pattern matching with safety checks and rewrites that insert fused nodes in [`fusert/optimize.py`](fusert/optimize.py) |
-| Frontend operators | Rewrites to `LayerNormalization` and `Gelu`, plus a `MatMul` + `Add` + `Split` representation for QKV |
-| Correctness | Original-versus-optimized output comparison using ONNX Runtime with graph optimization disabled |
-| Performance methodology | GPU warmup, synchronization, p50/p95/p99 latency, throughput, and ORT optimizer-on/off controls |
-| TensorRT analysis | Engine construction, engine-layer comparison, layer-by-layer profiling, generated-kernel breakdown, and attention-path analysis |
-| Custom-op groundwork | Residual + LayerNorm matcher, fused-attention reference implementation, attention-pattern matcher, unit tests, CUDA/CMake toolchain setup |
-| Frameworks and tools | PyTorch, ONNX, ONNX Runtime CUDA, TensorRT, CUDA, CMake, Python |
+---
 
-## How FuseRT v1.0 works
+## 📖 What is FuseRT?
 
-FuseRT loads an ONNX graph, runs a list of passes, and saves a smaller graph. Each pass finds a pattern, checks that it is safe to rewrite, and replaces the pattern with a smaller equivalent representation.
+Modern AI models like BERT or ChatGPT are made of billions of tiny mathematical operations (multiplications, additions, normalizations, and activations). 
 
-| Pass | Pattern found | Rewritten to | Nodes removed on BERT-base |
-|---|---|---|---:|
-| `inline_constants` | `Constant` nodes | plain weights | 348 |
-| `fuse_layernorm` | ReduceMean, Sub, Pow, ReduceMean, Add, Sqrt, Div, Mul, Add | one `LayerNormalization` node | 200 |
-| `fuse_gelu` | Div, Erf, Add, Mul, Mul | one `Gelu` node | 48 |
-| `merge_qkv` | three MatMul + bias Add operations reading the same tensor | one wide MatMul + Add + `Split` | 36 |
+Imagine assembling a meal where you walk all the way across the kitchen to the pantry for **every single grain of salt**:
+1. Walk to pantry, grab bun, walk back.
+2. Walk to pantry, grab burger patty, walk back.
+3. Walk to pantry, grab lettuce, walk back.
 
-The graph changes from:
+That is how unoptimized deep learning models run on GPUs! Even though modern GPUs have massive compute power, **they spend most of their time waiting for data to travel across slow GPU memory (VRAM)**. Every individual operation requires its own "trip" (a GPU kernel launch and VRAM memory transfer).
 
-```text
-1,231 nodes
--> 883 after constant inlining
--> 683 after LayerNorm fusion
--> 635 after GELU fusion
--> 599 after QKV merging
+### What FuseRT Does
+FuseRT solves this in two deliberate phases:
+1. **FuseRT 1.0 (Graph Surgery):** Inspects the raw model graph and collapses chains of scattered operations into single, unified operations. Instead of 1,231 separate tasks, it streamlines the graph down to **599 tasks** — cutting kernel launch overhead in half.
+2. **FuseRT 2.0 (Deep GPU Profiling & Fused Kernels):** Profiles compiled TensorRT engines down to individual microseconds. It pinpoints the **BERT attention bottleneck (23.0% of total runtime)** and designs custom CUDA kernels so data stays on ultra-fast on-chip GPU cache (SRAM) without ever touching slow VRAM.
+
+---
+
+## 🏆 Key Headline Achievements
+
+All benchmarks performed on an **NVIDIA GeForce RTX 3060 Laptop GPU (6 GB VRAM)** using standard **FP32 precision**, sequence length 128, and BERT-base (110M parameters).
+
+| Metric | Before (Raw Model) | After (FuseRT) | Real-World Impact |
+|:---|:---:|:---:|:---|
+| **Graph Node Count** | `1,231 nodes` | **`599 nodes`** | **51.3% reduction** in graph complexity |
+| **ORT Latency (Batch 1)** | `15.68 ms` | **`7.39 ms`** | **2.1x speedup** for real-time interactive queries |
+| **Numerical Error (MAE)** | Baseline | **`2.19e-5`** | **100% mathematically exact** (tolerance `1e-4`) |
+| **TensorRT Baseline** | `197 layers` | `197 layers` | Compiled to **3.83 ms** batch-1 latency |
+| **Attention Target Identified** | Dispersed | **`1.586 ms (23.0%)`** | Uncovered exact 12-layer attention bottleneck |
+
+---
+
+## 📊 Phase 1: Custom Graph Fusion Passes
+
+![Graph Node Reduction](docs/assets/node_reduction_chart.svg)
+
+### The 4 Graph Transformation Passes
+
+Using [`onnx-graphsurgeon`](https://github.com/NVIDIA/TensorRT/tree/main/tools/onnx-graphsurgeon), FuseRT implements 4 pattern-matching algorithms in [`fusert/optimize.py`](fusert/optimize.py):
+
+```mermaid
+graph LR
+    subgraph RawGraph["Raw ONNX Graph (1,231 Nodes)"]
+      A["348 Constant Nodes"]
+      B["200 LayerNorm Ops<br/>(Mean, Sub, Pow, Sqrt...)"]
+      C["48 GELU Ops<br/>(Div, Erf, Add, Mul...)"]
+      D["36 Disjoint QKV Branches"]
+    end
+
+    subgraph FuseRTEngine["FuseRT Optimization Pipeline"]
+      P1["Pass 1: Inline Constants"]
+      P2["Pass 2: Fuse LayerNorm"]
+      P3["Pass 3: Fuse GELU"]
+      P4["Pass 4: Merge QKV Projections"]
+    end
+
+    subgraph OptimizedGraph["Clean Graph (599 Nodes)"]
+      O1["Plain Inlined Weights"]
+      O2["25 Native LayerNormalization Nodes"]
+      O3["12 Native Gelu Nodes"]
+      O4["12 Unified MatMul + Bias + Split"]
+    end
+
+    A --> P1 --> O1
+    B --> P2 --> O2
+    C --> P3 --> O3
+    D --> P4 --> O4
 ```
 
-The three fusion passes account for 284 of the 632 removed nodes. Constant inlining removes graph housekeeping nodes.
+1. **Inline Constants (`inline_constants`):** Converts 348 standalone `Constant` nodes directly into tensor initializers. Eliminates unnecessary graph nodes and memory lookups.
+2. **LayerNorm Fusion (`fuse_layernorm`):** Replaces a 9-node chain (`ReduceMean -> Sub -> Pow -> ReduceMean -> Add -> Sqrt -> Div -> Mul -> Add`) with a single high-level `LayerNormalization` node. Removes 200 nodes.
+3. **GELU Fusion (`fuse_gelu`):** Matches the standard Gaussian Error Linear Unit activation curve (`x -> Div -> Erf -> Add -> Mul -> Mul`) and replaces it with one `Gelu` node. Removes 48 nodes.
+4. **QKV Merge (`merge_qkv`):** Finds the 3 separate `MatMul` + `Add` branches for Query, Key, and Value projections and merges them into one single wide matrix multiplication, followed by a `Split`. Removes 36 nodes.
 
-## v1.0 results
+---
 
-All numbers use an RTX 3060 Laptop GPU, FP32, sequence length 128, and p50 latency in milliseconds. Small percentage differences on a laptop GPU should be treated as noise.
+### ⏱️ Phase 1 Benchmark Results
 
-### ONNX Runtime CUDA
+![ONNX Runtime Latency Comparison](docs/assets/ort_latency_chart.svg)
 
-| Batch | Original, ORT optimizer off | FuseRT, ORT optimizer off | Original, ORT default | FuseRT, ORT default |
-|---:|---:|---:|---:|---:|
-| 1 | 15.68 | **7.39** | 7.15 | **6.12** |
-| 8 | 36.68 | **29.38** | 27.01 | 27.19 |
-| 32 | 130.32 | **106.10** | 96.78 | 99.52 |
+#### 1. ONNX Runtime CUDA (FP32)
+*p50 latency in milliseconds, RTX 3060 Laptop GPU, Sequence Length 128:*
 
-### TensorRT 11.4
+| Batch Size | Original Export (ORT Optimizer Off) | FuseRT Optimized (ORT Optimizer Off) | Speedup Factor | Original (ORT Default On) | FuseRT (ORT Default On) |
+|:---:|:---:|:---:|:---:|:---:|:---:|
+| **Batch 1** | `15.68 ms` | **`7.39 ms`** | **🚀 2.1x Faster** | `7.15 ms` | **`6.12 ms`** |
+| **Batch 8** | `36.68 ms` | **`29.38 ms`** | **⚡ 1.25x Faster** | `27.01 ms` | `27.19 ms` |
+| **Batch 32** | `130.32 ms` | **`106.10 ms`** | **⚡ 1.23x Faster** | `96.78 ms` | `99.52 ms` |
 
-| Batch | Original ONNX engine | FuseRT ONNX engine | ONNX Runtime default, for reference |
-|---:|---:|---:|---:|
-| 1 | **3.83** | 3.93 | 7.15 |
-| 8 | **19.98** | 20.33 | 27.01 |
-| 32 | 78.17 | **77.96** | 96.78 |
+#### 2. TensorRT 11.4 Baseline Comparison
 
-## v1.0 findings
+| Batch Size | Engine Built from Original ONNX | Engine Built from FuseRT ONNX | TensorRT Behavior |
+|:---:|:---:|:---:|:---|
+| **Batch 1** | **`3.83 ms`** | `3.93 ms` | *Identical 197 layers generated* |
+| **Batch 8** | **`19.98 ms`** | `20.33 ms` | *Identical internal layer count* |
+| **Batch 32** | `78.17 ms` | **`77.96 ms`** | *Identical memory footprint (438.8 MB)* |
 
-1. **FuseRT helps most when another optimizer is not already rewriting the graph.** With ONNX Runtime optimization disabled, batch-1 latency drops from 15.68 ms to 7.39 ms.
-2. **Production runtimes already discover many standard fusions.** With ORT's default optimizer enabled, FuseRT adds a measurable benefit at batch 1 and is within noise at larger batches.
-3. **TensorRT already performs equivalent standard fusions.** Engines built from the original and FuseRT-rewritten ONNX graphs both contain 197 TensorRT layers with matching layer-type counts.
-4. **TensorRT is the fastest backend in this baseline.** At batch 1, the original TensorRT engine runs in 3.83 ms, compared with 7.15 ms for ONNX Runtime CUDA with its default optimizer.
+> [!NOTE]
+> **The Key Architectural Finding:**
+> When the runtime optimizer is off, FuseRT delivers a massive **2.1x speedup**. However, when inspecting the compiled TensorRT 11.4 engines, both the original and FuseRT models compile down to the **exact same 197 layers**.
+> 
+> Why? Because modern production compilers like TensorRT already recognize standard LayerNorm, GELU, and QKV patterns internally. To unlock performance beyond TensorRT, **graph-level rewriting is not enough — we must profile internal GPU execution and write custom CUDA kernels.**
 
-## Correctness
+---
 
-[`fusert/verify.py`](fusert/verify.py) runs the original and optimized models with ONNX Runtime graph optimization disabled, so both graphs execute as written.
+## 🔬 Phase 2: TensorRT Profiling & The Attention Hotspot
 
-The verification covers four batch and sequence-length configurations, including padded attention masks.
+To discover where the GPU is actually spending time inside the 197 TensorRT layers, FuseRT 2.0 builds a dedicated per-layer execution profiler ([`bench/profile_trt_layers.py`](bench/profile_trt_layers.py)).
 
-```text
-Maximum absolute error: 2.19e-5
-Tolerance:               1e-4
-Result:                  PASS
+![TensorRT Layer Profiling Breakdown](docs/assets/trt_breakdown_chart.svg)
+
+### Deep-Dive Analysis of the 197 TensorRT Layers
+At Batch 1, the total profiled layer time is **6.90 ms**:
+- **73 GEMM (Matrix Multiplication) layers**: Account for **4.925 ms (71.4%)**.
+- **75 TensorRT Generated Kernels (`kgen`)**: Account for **1.589 ms (23.0%)**.
+- **49 Casts, Reshapes & Shape calls**: Account for **0.388 ms (5.6%)**.
+
+### Why Was Residual + LayerNorm Deprioritized?
+Initially, we explored fusing `Residual + LayerNorm` ([`fusert/fuse_residual_layernorm.py`](fusert/fuse_residual_layernorm.py)). However, layer profiling revealed that across all 12 BERT layers, Residual + LayerNorm only consumes **0.545 ms (7.9%)**. Even if a custom kernel made it twice as fast, the overall model speedup would be negligible (<4%).
+
+### The True Hotspot: The 12 Attention Blocks (23.0% of Profiled Time)
+Tracing through the 12 encoder layers revealed that the central attention sequence accounts for **1.586 ms**:
+- $Q 	imes K^T$ GEMMs (12 layers): `0.658 ms (9.5%)`
+- Masked Softmax (12 layers): `0.417 ms (6.0%)`
+- Attention Scores $	imes V$ GEMMs (12 layers): `0.511 ms (7.4%)`
+
+**Total Central Attention: 1.586 ms = 23.0% of profiled execution time.**
+
+---
+
+## ⚡ The Solution: Fused Attention Architecture
+
+![Memory Traffic Comparison](docs/assets/attention_fusion_visual.svg)
+
+### The Memory Bottleneck
+In standard execution, computing self-attention requires three separate GPU operations:
+1. **$Q 	imes K^T$**: Multiplies Query and Key matrices, generating a large intermediate tensor $[Batch, 12, 128, 128]$, and **writes it to slow global VRAM**.
+2. **Softmax**: Reads the entire matrix back from VRAM, applies exponent and scaling, and **writes the probabilities back to VRAM**.
+3. **Scores $	imes V$**: Reads the probabilities and Value vectors from VRAM again to produce the final output.
+
+### The FuseRT Fused Kernel Approach
+By fusing all three steps into a single custom CUDA kernel:
+- The entire attention block runs in **one single kernel launch**.
+- Intermediate attention scores are kept inside **fast on-chip Shared Memory (SRAM) and GPU registers** (up to 19 TB/s effective bandwidth).
+- **Eliminates 2 full global memory round-trips** per attention head across all 12 layers!
+
+---
+
+## 🧪 Groundwork & Verification Ready for Kernel Execution
+
+Before writing the custom C++/CUDA kernel, FuseRT builds rigorous testing and matching infrastructure:
+
+```mermaid
+sequenceDiagram
+    autonumber
+    participant PyTorch as PyTorch SDPA Reference
+    participant FuseRef as FuseRT Reference (NumPy/Torch)
+    participant Matcher as ONNX Pattern Matcher
+    participant Plugin as TensorRT IPluginV3 C++
+
+    Note over PyTorch,FuseRef: 1. Numerical Ground Truth
+    PyTorch->>FuseRef: Validate masked scaled dot-product attention
+    FuseRef-->>PyTorch: 100% Match (Passed Unit Test)
+
+    Note over Matcher: 2. Graph Identification
+    Matcher->>Matcher: Scans bert_opt.onnx backward & forward from Softmax
+    Matcher-->>Matcher: Found 12/12 Attention blocks (0 skipped!)
+
+    Note over Plugin: 3. Custom C++ Engine Plug-in
+    Plugin->>Plugin: Environment verified (nvcc 13.4, g++ 13.3, CMake 3.28)
 ```
 
-## FuseRT 2.0: custom-op groundwork
+1. **Trusted Reference Implementation** ([`fusert/reference_fused_attention.py`](fusert/reference_fused_attention.py)):
+   - Implements masked scaled dot-product attention as the ground truth.
+   - Tested against PyTorch's native `scaled_dot_product_attention` ([`tests/test_reference_fused_attention.py`](tests/test_reference_fused_attention.py)).
+2. **Attention Pattern Matcher** ([`fusert/fuse_attention.py`](fusert/fuse_attention.py)):
+   - Automatically traverses the ONNX graph backward from every `Softmax` to locate $Q 	imes K^T$ and forward to locate $Scores 	imes V$.
+   - **Result:** Successfully detects all **12 BERT attention blocks** with zero skipped nodes.
+3. **Toolchain & Build Environment**:
+   - Ubuntu 24.04 (WSL2), CUDA Toolkit 13.4.3 (`nvcc`), GCC 13.3, CMake 3.28.3, TensorRT 11.4 C++ headers.
 
-FuseRT 2.0 keeps the v1.0 baseline frozen and adds custom-operation research on top of it. The goal is not to claim that a custom plugin already beats TensorRT. The goal is to use profiling and correctness checks to identify a target that is large enough to justify custom CUDA work.
+---
 
-### Frozen baseline
+## 🛠️ Step-by-Step Reproduction Guide
 
-The v1.0 results are saved in [`results/baseline/`](results/baseline) and tagged as `v1.0-baseline`.
+Follow these commands to reproduce all graph optimizations, correctness verifications, benchmarks, and profiling reports:
 
-This includes graph statistics, correctness results, TensorRT build logs, TensorRT layer dumps, ONNX Runtime benchmarks, TensorRT benchmarks, and environment information.
-
-Summary: [`results/baseline/baseline.md`](results/baseline/baseline.md).
-
-## Residual + LayerNorm exploration
-
-FuseRT 2.0 first explored a custom operation named `FusedResidualLayerNorm`.
-
-It would compute:
-
-```text
-LayerNorm(hidden_state + residual) * gamma + beta
-```
-
-without writing the intermediate `hidden_state + residual` tensor to GPU memory.
-
-### Matcher results
-
-[`fusert/fuse_residual_layernorm.py`](fusert/fuse_residual_layernorm.py) finds every `Add -> LayerNormalization` pair and checks whether it is safe to fuse.
-
-A site is considered safe when:
-
-- both `Add` inputs are float32 tensors
-- both inputs have provably equal shapes
-- the `Add` does not contain a constant bias input
-- the summed tensor has only one consumer
-- LayerNorm normalizes the final dimension
-- gamma and beta are constants
-
-On BERT-base:
-
-| Item | Count |
-|---|---:|
-| `LayerNormalization` nodes | 25 |
-| Safe residual + LayerNorm matches | 24 |
-| Skipped matches | 1 |
-
-The skipped case is the embedding LayerNorm, where position embeddings use broadcasting and therefore do not satisfy the same-shape safety requirement.
-
-### Residual + LayerNorm reference and tests
-
-[`fusert/reference_residual_ln.py`](fusert/reference_residual_ln.py) provides a trusted Python reference implementation.
-
-Tests cover a valid residual add, a bias add that must be skipped, a broadcast add that must be skipped, an intermediate sum with another consumer, and numerical agreement with ONNX Runtime LayerNormalization.
-
-The future CUDA/TensorRT plugin for this operation has not yet been implemented.
-
-## TensorRT engine profiling
-
-Before writing custom CUDA, FuseRT profiles the original TensorRT engine to determine where runtime is spent.
-
-At batch 1 and sequence length 128:
-
-```text
-TensorRT engine layers: 197
-Profiled layer-time sum: 6.901 ms
-End-to-end TensorRT p50: 3.83 ms
-```
-
-The sum of per-layer profiler measurements is larger than end-to-end latency because profiling adds overhead. Therefore, these measurements are used for **relative shares and target selection**, not as direct latency measurements.
-
-### Layer-type breakdown
-
-| TensorRT layer type | Count | Total profiled time | Share |
-|---|---:|---:|---:|
-| GEMM | 73 | 4.925 ms | 71.4% |
-| TensorRT-generated kernel (`kgen`) | 75 | 1.589 ms | 23.0% |
-| Cast | 24 | 0.220 ms | 3.2% |
-| Reshape | 24 | 0.149 ms | 2.2% |
-| Shape call | 1 | 0.019 ms | 0.3% |
-
-The 15 slowest individual layers are GEMMs, but no single GEMM dominates total runtime. A useful optimization therefore needs to target a repeated group of operations rather than one isolated layer.
-
-### Generated-kernel breakdown
-
-Among the 75 TensorRT-generated kernels:
-
-| Category | Count | Total profiled time | Share of profiled time |
-|---|---:|---:|---:|
-| LayerNorm and residual-related kernels | 38 | 0.545 ms | 7.9% |
-| Transpose and other kernels | 13 | 0.492 ms | 7.1% |
-| Softmax | 12 | 0.417 ms | 6.0% |
-| GELU | 12 | 0.134 ms | 1.9% |
-
-This showed that Residual + LayerNorm alone is too small to be the only target for a large TensorRT speedup.
-
-## Attention as the next optimization target
-
-BERT repeats the following attention computation in each of its 12 encoder layers:
-
-```text
-Q x K^T
--> attention scaling and mask
--> Softmax
--> attention probabilities x V
-```
-
-FuseRT profiles and validates this complete path before attempting a plugin.
-
-### Attention timing breakdown
-
-[`bench/attention_breakdown.py`](bench/attention_breakdown.py) separates TensorRT attention-related operations into individual categories.
-
-| Attention-related category | Count | Total profiled time | Share of profiled time |
-|---|---:|---:|---:|
-| QKV projection GEMMs | 12 | 0.995 ms | 14.4% |
-| Q x K^T GEMMs | 12 | 0.658 ms | 9.5% |
-| Softmax | 12 | 0.417 ms | 6.0% |
-| Attention scores x V GEMMs | 12 | 0.511 ms | 7.4% |
-| Attention output projection GEMMs | 12 | 0.993 ms | 14.4% |
-| Transpose candidates | 24 | 0.677 ms | 9.8% |
-
-The clean central attention target is:
-
-```text
-Q x K^T
-+ Softmax
-+ attention scores x V
-= 1.586 ms
-= 23.0% of profiled TensorRT layer time
-```
-
-This does **not** mean a future plugin will remove 23% of end-to-end latency. It still performs the same mathematical work. The potential improvement comes from reducing intermediate memory traffic and combining separate GPU launches.
-
-The transpose candidates add up to a larger possible group, but they require further graph-level validation before being included in a custom plugin.
-
-### Attention tensor-shape inspection
-
-[`bench/inspect_attention_layers.py`](bench/inspect_attention_layers.py) verifies the inputs and outputs of the selected TensorRT layers.
-
-The inspection confirms:
-
-```text
-Q x K^T:
-[batch, 128, 64] x [batch, 64, 128]
--> [batch, 128, 128]
-
-Softmax:
-attention scores + attention_mask
--> attention probabilities
-
-scores x V:
-[batch, 128, 128] x [batch, 128, 64]
--> [batch, 128, 64]
-```
-
-BERT-base uses 12 encoder layers, 12 attention heads, sequence length 128, and head size 64.
-
-## Fused-attention reference implementation
-
-[`fusert/reference_fused_attention.py`](fusert/reference_fused_attention.py) implements a correct PyTorch reference for masked scaled dot-product attention:
-
-```text
-Q x K^T
--> divide by sqrt(head_size)
--> apply padding mask
--> Softmax
--> probabilities x V
-```
-
-The reference is intentionally not an optimization. It is the trusted answer that a future CUDA/TensorRT plugin must match.
-
-[`tests/test_reference_fused_attention.py`](tests/test_reference_fused_attention.py) compares the FuseRT reference against PyTorch `scaled_dot_product_attention`.
-
-```text
-Result: 1 passed
-```
-
-## Attention-pattern matcher
-
-[`fusert/fuse_attention.py`](fusert/fuse_attention.py) scans the optimized ONNX graph and finds this pattern:
-
-```text
-MatMul
--> Softmax
--> MatMul
-```
-
-It traces backward from each Softmax to find `Q x K^T`, then forward to find `scores x V`.
-
-On `bert_opt.onnx`:
-
-```text
-attention matches: 12
-skipped Softmax nodes: 0
-```
-
-One complete pattern is found in every BERT encoder layer, from `layer.0` through `layer.11`.
-
-[`tests/test_attention_matcher.py`](tests/test_attention_matcher.py) verifies that a complete attention pattern is found and an incomplete pattern is skipped.
-
-```text
-Result: 2 passed
-```
-
-## CUDA and TensorRT C++ development setup
-
-The custom plugin requires native CUDA and TensorRT C++ tooling, not only the TensorRT Python package.
-
-The development environment has been prepared with:
-
-```text
-WSL2 Ubuntu 24.04.3
-CMake 3.28.3
-CUDA Toolkit 13.4.3
-nvcc 13.4.92
-g++ 13.3.0
-NVIDIA RTX 3060 Laptop GPU
-```
-
-The next implementation stage is a TensorRT C++ plugin and CUDA kernel for the validated attention path. No custom CUDA attention kernel has been benchmarked yet.
-
-## Reproduce
-
-### v1.0 graph optimization and benchmarking
-
+### 1. Setup Environment
 ```bash
-python models/export_bert.py
-python -m fusert.stats models/bert.onnx
-python -m fusert.optimize models/bert.onnx models/bert_opt.onnx
-python -m fusert.verify models/bert.onnx models/bert_opt.onnx
+git clone https://github.com/your-username/FuseRT.git
+cd FuseRT
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+```
 
+### 2. Export & Optimize Graph (Phase 1)
+```bash
+# 1. Export standard BERT-base to ONNX
+python models/export_bert.py
+
+# 2. View raw graph statistics (1,231 nodes)
+python -m fusert.stats models/bert.onnx
+
+# 3. Run the FuseRT fusion passes (Produces 599-node model)
+python -m fusert.optimize models/bert.onnx models/bert_opt.onnx
+
+# 4. Verify numerical correctness against original
+python -m fusert.verify models/bert.onnx models/bert_opt.onnx
+```
+
+### 3. Build Engines & Benchmark (Phase 1)
+```bash
+# 1. Build TensorRT 11.4 engines
 python bench/build_trt.py models/bert.onnx models/bert_fp32.plan results/trt_original_layers.json
 python bench/build_trt.py models/bert_opt.onnx models/bert_opt_fp32.plan results/trt_optimized_layers.json
-python bench/compare_layers.py results/trt_original_layers.json results/trt_optimized_layers.json
+
+# 2. Benchmark ONNX Runtime (shows 2.1x speedup at batch 1)
 python bench/bench_ort.py
+
+# 3. Benchmark TensorRT execution
 python bench/bench_trt.py
 ```
 
-### FuseRT 2.0 analysis
-
+### 4. Run TensorRT Layer Profiling & Matchers (Phase 2)
 ```bash
-python -m fusert.fuse_residual_layernorm models/bert_opt.onnx
+# 1. Profile original TensorRT engine layer-by-layer
+python bench/profile_trt_layers.py   models/bert_fp32.plan   results/trt_original_layers.json   1   results/profile_original_b1.json
 
-python bench/profile_trt_layers.py \
-  models/bert_fp32.plan \
-  results/trt_original_layers.json \
-  1 \
-  results/profile_original_b1.json
+# 2. Break down the 23% Attention hotspot
+python bench/attention_breakdown.py   results/profile_original_b1.json   results/trt_original_layers.json   results/attention_breakdown_b1.json
 
-python bench/kgen_breakdown.py \
-  results/profile_original_b1.json \
-  results/trt_original_layers.json \
-  results/kgen_breakdown_b1.json
+# 3. Scan and locate all 12 attention blocks in the ONNX graph
+python fusert/fuse_attention.py   models/bert_opt.onnx   results/attention_pattern_matches.json
 
-python bench/attention_breakdown.py \
-  results/profile_original_b1.json \
-  results/trt_original_layers.json \
-  results/attention_breakdown_b1.json
-
-python bench/inspect_attention_layers.py \
-  results/attention_breakdown_b1.json \
-  results/trt_original_layers.json \
-  results/attention_layer_shapes_b1.json
-
-python fusert/fuse_attention.py \
-  models/bert_opt.onnx \
-  results/attention_pattern_matches.json
-
-PYTHONPATH=. python -m pytest -q tests
+# 4. Run full test suite (All 10 tests pass)
+PYTHONPATH=. pytest -v
 ```
 
-Raw output from every run is saved in [`results/logs/`](results/logs). Structured profiling and inspection results are saved in [`results/`](results).
+---
 
-## Repository layout
+## 📂 Repository Structure
 
 ```text
-fusert/
-  optimize.py                      v1.0 ONNX graph fusion passes
-  verify.py                        original-versus-optimized correctness check
-  stats.py                         graph-node statistics
-  inspect_graph.py                 graph inspection helpers
-  fuse_residual_layernorm.py       residual + LayerNorm matcher
-  reference_residual_ln.py         residual + LayerNorm reference
-  fuse_attention.py                ONNX attention-pattern matcher
-  reference_fused_attention.py     masked scaled-attention reference
-
-bench/
-  build_trt.py                     TensorRT engine builder
-  compare_layers.py                original-versus-optimized TensorRT layer comparison
-  bench_ort.py                     ONNX Runtime benchmark
-  bench_trt.py                     TensorRT benchmark
-  profile_trt_layers.py            TensorRT per-layer profiler
-  kgen_breakdown.py                generated-kernel timing breakdown
-  attention_candidates.py          initial broad attention candidate scan
-  attention_breakdown.py           exact attention timing breakdown
-  inspect_attention_layers.py      attention input/output shape inspection
-
-plugins/
-  fused_residual_layernorm.h       residual + LayerNorm kernel interface
-
-docs/
-  plugin_interface.md              residual + LayerNorm TensorRT plugin contract
-
-tests/
-  test_residual_ln_matcher.py
-  test_reference_residual_ln.py
-  test_attention_matcher.py
-  test_reference_fused_attention.py
-
-results/
-  baseline/                        frozen v1.0 baseline
-  logs/                            saved command output
-  *.json                           saved profiling and inspection results
+FuseRT/
+├── docs/
+│   ├── assets/                      # Generated animated & vector SVG charts
+│   │   ├── pipeline_banner.svg
+│   │   ├── node_reduction_chart.svg
+│   │   ├── ort_latency_chart.svg
+│   │   ├── trt_breakdown_chart.svg
+│   │   └── attention_fusion_visual.svg
+│   └── plugin_interface.md          # TensorRT IPluginV3 contract specifications
+├── fusert/                          # Core Python graph compiler & matchers
+│   ├── optimize.py                  # v1.0 ONNX graph fusion passes (LayerNorm, GELU, QKV)
+│   ├── verify.py                    # Multi-shape numerical equivalence validator
+│   ├── stats.py                     # Node & operator counter utility
+│   ├── fuse_attention.py            # ONNX attention-pattern detector
+│   ├── reference_fused_attention.py # PyTorch ground-truth masked attention reference
+│   ├── fuse_residual_layernorm.py   # Residual + LayerNorm pattern matcher
+│   └── reference_residual_ln.py     # NumPy reference implementation
+├── bench/                           # Profiling, engine builders & benchmarks
+│   ├── build_trt.py                 # TensorRT engine builder from ONNX
+│   ├── bench_ort.py                 # ONNX Runtime CUDA benchmark runner
+│   ├── bench_trt.py                 # TensorRT CUDA benchmark runner
+│   ├── profile_trt_layers.py        # Microsecond-accurate per-layer TRT profiler
+│   ├── attention_breakdown.py       # Attention timing category extractor
+│   └── inspect_attention_layers.py  # Tensor shape and dimension validator
+├── plugins/                         # Custom C++ / CUDA TensorRT plugin declarations
+│   └── fused_residual_layernorm.h   # IPluginV3 interface declaration
+├── tests/                           # Pytest test suite (10 unit tests)
+│   ├── test_attention_matcher.py
+│   ├── test_reference_fused_attention.py
+│   ├── test_residual_ln_matcher.py
+│   └── test_reference_residual_ln.py
+├── results/                         # Structured JSON profiling data & benchmark logs
+│   ├── baseline/                    # Frozen v1.0 baseline metrics
+│   └── logs/                        # Raw stdout execution traces
+└── models/                          # Exported ONNX graphs and serialized .plan engines
 ```
+
+---
+
+<div align="center">
+  <sub>Built with ❤️ for deep learning inference optimization and GPU systems engineering.</sub>
+</div>

@@ -1,0 +1,12 @@
+Command 'nvcc' not found, but can be installed with:
+sudo apt install nvidia-cuda-toolkit
+Command 'cmake' not found, but can be installed with:
+sudo snap install cmake  # version 4.3.3, or
+sudo apt  install cmake  # version 3.27.8-1build1
+See 'snap info cmake' for additional versions.
+g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0
+Copyright (C) 2023 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+TensorRT Python: 11.4.0.106

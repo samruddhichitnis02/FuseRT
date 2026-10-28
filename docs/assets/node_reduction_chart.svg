@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 320" width="100%" height="320" style="background:#0d1117; border-radius:12px; font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+  <defs>
+    <linearGradient id="bar-red" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#f87171"/>
+      <stop offset="100%" stop-color="#ef4444"/>
+    </linearGradient>
+    <linearGradient id="bar-amber" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#fbbf24"/>
+      <stop offset="100%" stop-color="#f59e0b"/>
+    </linearGradient>
+    <linearGradient id="bar-indigo" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#818cf8"/>
+      <stop offset="100%" stop-color="#6366f1"/>
+    </linearGradient>
+    <linearGradient id="bar-cyan" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#38bdf8"/>
+      <stop offset="100%" stop-color="#0284c7"/>
+    </linearGradient>
+    <linearGradient id="bar-emerald" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#34d399"/>
+      <stop offset="100%" stop-color="#059669"/>
+    </linearGradient>
+  </defs>
+
+  <text x="30" y="35" fill="#f1f5f9" font-size="16" font-weight="700">BERT-base Graph Node Count After Each Optimization Pass</text>
+  <text x="30" y="55" fill="#94a3b8" font-size="12">Fewer nodes = Lower GPU kernel launch overhead, smaller memory footprint, and cleaner dataflow</text>
+
+  <!-- Scale markings -->
+  <line x1="220" y1="75" x2="220" y2="280" stroke="#21262d" stroke-width="1"/>
+  <line x1="420" y1="75" x2="420" y2="280" stroke="#21262d" stroke-width="1" stroke-dasharray="3 3"/>
+  <line x1="620" y1="75" x2="620" y2="280" stroke="#21262d" stroke-width="1" stroke-dasharray="3 3"/>
+  <line x1="820" y1="75" x2="820" y2="280" stroke="#21262d" stroke-width="1" stroke-dasharray="3 3"/>
+  
+  <text x="220" y="70" fill="#475569" font-size="10" text-anchor="middle">0</text>
+  <text x="420" y="70" fill="#475569" font-size="10" text-anchor="middle">400</text>
+  <text x="620" y="70" fill="#475569" font-size="10" text-anchor="middle">800</text>
+  <text x="820" y="70" fill="#475569" font-size="10" text-anchor="middle">1,200</text>
+
+  <!-- Bar 1: Original Model (1231) -->
+  <text x="205" y="105" fill="#e2e8f0" font-size="12" font-weight="600" text-anchor="end">Original Model</text>
+  <rect x="220" y="88" width="615" height="26" rx="5" fill="url(#bar-red)"/>
+  <text x="845" y="106" fill="#f87171" font-size="13" font-weight="700">1,231 nodes</text>
+  <text x="745" y="105" fill="#ffffff" font-size="11" font-weight="600" opacity="0.9">Base Export</text>
+
+  <!-- Bar 2: Inline Constants (883) -->
+  <text x="205" y="145" fill="#e2e8f0" font-size="12" font-weight="600" text-anchor="end">Inline Constants</text>
+  <rect x="220" y="128" width="441" height="26" rx="5" fill="url(#bar-amber)"/>
+  <text x="670" y="146" fill="#fbbf24" font-size="13" font-weight="700">883 <tspan fill="#f59e0b" font-size="11">(-348 nodes)</tspan></text>
+
+  <!-- Bar 3: Fuse LayerNorm (683) -->
+  <text x="205" y="185" fill="#e2e8f0" font-size="12" font-weight="600" text-anchor="end">Fuse LayerNorm</text>
+  <rect x="220" y="168" width="341" height="26" rx="5" fill="url(#bar-indigo)"/>
+  <text x="570" y="186" fill="#a5b4fc" font-size="13" font-weight="700">683 <tspan fill="#818cf8" font-size="11">(-200 nodes)</tspan></text>
+
+  <!-- Bar 4: Fuse GELU (635) -->
+  <text x="205" y="225" fill="#e2e8f0" font-size="12" font-weight="600" text-anchor="end">Fuse GELU</text>
+  <rect x="220" y="208" width="317" height="26" rx="5" fill="url(#bar-cyan)"/>
+  <text x="545" y="226" fill="#7dd3fc" font-size="13" font-weight="700">635 <tspan fill="#38bdf8" font-size="11">(-48 nodes)</tspan></text>
+
+  <!-- Bar 5: Merge QKV (599) -->
+  <text x="205" y="265" fill="#34d399" font-size="12" font-weight="700" text-anchor="end">Merge QKV (Final)</text>
+  <rect x="220" y="248" width="299" height="26" rx="5" fill="url(#bar-emerald)"/>
+  <text x="530" y="266" fill="#34d399" font-size="14" font-weight="800">599 <tspan fill="#10b981" font-size="11">(-36 nodes)</tspan></text>
+
+  <!-- Reduction Badge -->
+  <rect x="670" y="230" width="180" height="54" rx="8" fill="#161b22" stroke="#34d399" stroke-width="1.5"/>
+  <text x="760" y="252" fill="#94a3b8" font-size="11" text-anchor="middle">TOTAL GRAPH REDUCTION</text>
+  <text x="760" y="274" fill="#34d399" font-size="16" font-weight="800" text-anchor="middle">-51.3% FEWER NODES</text>
+</svg>

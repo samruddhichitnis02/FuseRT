@@ -8,3 +8,4 @@ __pycache__/
 *.nsys-rep
 *.ncu-rep
 results/raw/
+*.deb
