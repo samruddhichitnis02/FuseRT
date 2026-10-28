@@ -308,6 +308,4 @@ FuseRT/
 
 ---
 
-<div align="center">
-  <sub>Built with ❤️ for deep learning inference optimization and GPU systems engineering.</sub>
-</div>
+
