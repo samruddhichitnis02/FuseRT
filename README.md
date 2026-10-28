@@ -21,7 +21,7 @@
 
 ## 🚀 The End-to-End Pipeline
 
-![FuseRT End-to-End Pipeline](docs/assets/pipeline_banner.svg)
+![FuseRT End-to-End Pipeline](docs/assets/pipeline_flow.svg)
 
 ---
 
@@ -103,7 +103,7 @@ graph LR
 
 ### ⏱️ Phase 1 Benchmark Results
 
-![ONNX Runtime Latency Comparison](docs/assets/ort_latency_chart.svg)
+![ONNX Runtime Latency Comparison](docs/assets/ort_speedup_chart.svg)
 
 #### 1. ONNX Runtime CUDA (FP32)
 *p50 latency in milliseconds, NVIDIA GPU, Sequence Length 128:*
@@ -134,7 +134,7 @@ graph LR
 
 To discover where the GPU is actually spending time inside the 197 TensorRT layers, FuseRT 2.0 builds a dedicated per-layer execution profiler ([`bench/profile_trt_layers.py`](bench/profile_trt_layers.py)).
 
-![TensorRT Layer Profiling Breakdown](docs/assets/trt_breakdown_chart.svg)
+![TensorRT Layer Profiling Breakdown](docs/assets/trt_layer_profile.svg)
 
 ### Deep-Dive Analysis of the 197 TensorRT Layers
 At Batch 1, the total profiled layer time is **6.90 ms**:
