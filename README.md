@@ -25,7 +25,7 @@ flowchart LR
     J --> K["Custom fused CUDA/TensorRT plugin"]
 ```
 
-![Animated FuseRT pipeline](docs/assets/fusert_pipeline.gif)
+![FuseRT inference optimization workflow](docs/assets/professional/fusert_workflow.gif)
 
 The animation shows the actual progression: the PyTorch model is exported to ONNX, FuseRT rewrites the graph, TensorRT compiles it, and the resulting GPU execution is profiled.
 
@@ -69,7 +69,7 @@ flowchart LR
     E --> F["599-node optimized graph"]
 ```
 
-![Animated graph reduction](docs/assets/graph_reduction.gif)
+![FuseRT graph reduction](docs/assets/professional/graph_reduction.svg)
 
 ### Graph transformation passes
 
@@ -140,15 +140,7 @@ TensorRT converted both the original and optimized ONNX graphs into **197 engine
 
 The layer count is the same because TensorRT already recognizes and applies many of the graph fusions that FuseRT performs.
 
-```mermaid
-xychart-beta
-    title "Total profiled TensorRT layer time"
-    x-axis [RTX3060, RTX5090]
-    y-axis "milliseconds" 0 --> 8
-    bar [6.901, 3.681]
-```
-
-![TensorRT layer profile animation](docs/assets/tensorrt_profile.gif)
+![TensorRT layer profile comparison](docs/assets/professional/trt_layer_profile_comparison.svg)
 
 ## 7. ONNX Runtime comparison
 
@@ -174,16 +166,9 @@ These are p50 latency results in milliseconds at sequence length 128.
 
 FuseRT gives the largest ONNX Runtime improvement when ORT's own graph optimizer is disabled. When ORT optimization is enabled, ORT already performs many similar transformations.
 
-```mermaid
-xychart-beta
-    title "RTX 5090 ONNX Runtime p50 latency"
-    x-axis [B1, B8, B32]
-    y-axis "milliseconds" 0 --> 20
-    bar [7.24, 7.67, 18.07]
-    bar [3.56, 4.97, 13.29]
-```
+![ONNX Runtime latency comparison](docs/assets/professional/ort_latency_comparison.svg)
 
-The first bar in each group is the original graph and the second is the FuseRT graph, with ORT graph optimization disabled.
+The chart compares both GPUs and both graph versions. Lower latency is better.
 
 ## 8. TensorRT comparison
 
@@ -207,14 +192,7 @@ These are p50 TensorRT inference latencies in milliseconds at sequence length 12
 
 The RTX 5090 optimized engine is only marginally faster. This demonstrates that ONNX graph rewriting alone does not substantially beat TensorRT for this model.
 
-```mermaid
-xychart-beta
-    title "RTX 5090 TensorRT p50 latency"
-    x-axis [B1, B8, B32]
-    y-axis "milliseconds" 0 --> 10
-    bar [2.70, 2.95, 9.17]
-    bar [2.60, 2.93, 9.16]
-```
+![TensorRT latency comparison](docs/assets/professional/trt_latency_comparison.svg)
 
 ## 9. Attention bottleneck comparison
 
@@ -238,15 +216,9 @@ Q × Kᵀ + Softmax + Scores × V
 | RTX 3060 | 1.586 ms | 23.0% |
 | RTX 5090 | 0.804 ms | 21.8% |
 
-```mermaid
-xychart-beta
-    title "Central attention target"
-    x-axis [RTX3060, RTX5090]
-    y-axis "milliseconds" 0 --> 2
-    bar [1.586, 0.804]
-```
+![Attention breakdown comparison](docs/assets/professional/attention_breakdown_comparison.svg)
 
-![Animated bottleneck profile](docs/assets/tensorrt_profile.gif)
+![TensorRT bottleneck profile](docs/assets/professional/trt_layer_profile_comparison.svg)
 
 The RTX 5090 reduces the absolute time, but attention remains a similar fraction of the profiled runtime. This makes it a reasonable target for deeper GPU investigation.
 
@@ -323,6 +295,15 @@ The repository already contains several visual assets under `docs/assets/`:
 - `ort_speedup_chart.svg`
 - `trt_layer_profile.svg`
 - `attention_fusion_visual.svg`
+
+The polished comparison visuals are in `docs/assets/professional/`:
+
+- `fusert_workflow.gif`
+- `graph_reduction.svg`
+- `ort_latency_comparison.svg`
+- `trt_latency_comparison.svg`
+- `trt_layer_profile_comparison.svg`
+- `attention_breakdown_comparison.svg`
 
 These can be embedded in GitHub-compatible Markdown with:
 
