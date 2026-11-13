@@ -1,0 +1,874 @@
+&&&& RUNNING TensorRT.trtexec [TensorRT v110400] [b106] # /usr/bin/trtexec --loadEngine=models/bert_opt_fp32.plan --shapes=input_ids:1x128,attention_mask:1x128 --warmUp=50 --iterations=200 --profilingVerbosity=detailed --dumpProfile
+[11/12/2026-22:42:13] [I] === Model Options ===
+[11/12/2026-22:42:13] [I] Format: *
+[11/12/2026-22:42:13] [I] Model: 
+[11/12/2026-22:42:13] [I] Output:
+[11/12/2026-22:42:13] [I] 
+[11/12/2026-22:42:13] [I] === System Options ===
+[11/12/2026-22:42:13] [I] Device: 0
+[11/12/2026-22:42:13] [I] DLACore: 
+[11/12/2026-22:42:13] [I] Loaded static plugins:
+[11/12/2026-22:42:13] [I] DLA Workspace Allocation Strategy: default
+[11/12/2026-22:42:13] [I] setPluginsToSerialize:
+[11/12/2026-22:42:13] [I] dynamicPlugins:
+[11/12/2026-22:42:13] [I] ignoreParsedPluginLibs: 0
+[11/12/2026-22:42:13] [I] 
+[11/12/2026-22:42:13] [I] === Inference Options ===
+[11/12/2026-22:42:13] [I] Batch: Explicit
+[11/12/2026-22:42:13] [I] Input inference shape : attention_mask=1x128
+[11/12/2026-22:42:13] [I] Input inference shape : input_ids=1x128
+[11/12/2026-22:42:13] [I] Iterations: 200
+[11/12/2026-22:42:13] [I] Duration: 3s (+ 50ms warm up)
+[11/12/2026-22:42:13] [I] Sleep time: 0ms
+[11/12/2026-22:42:13] [I] Idle time: 0ms
+[11/12/2026-22:42:13] [I] Inference Streams: 1
+[11/12/2026-22:42:13] [I] ExposeDMA: Disabled
+[11/12/2026-22:42:13] [I] Data transfers: Disabled
+[11/12/2026-22:42:13] [I] Spin-wait: Enabled
+[11/12/2026-22:42:13] [I] Multithreading: Disabled
+[11/12/2026-22:42:13] [I] CUDA Graph: Enabled
+[11/12/2026-22:42:13] [I] Time Deserialize: Disabled
+[11/12/2026-22:42:13] [I] Time Refit: Disabled
+[11/12/2026-22:42:13] [I] NVTX verbosity: 2
+[11/12/2026-22:42:13] [I] Persistent Cache Ratio: 0
+[11/12/2026-22:42:13] [I] Optimization Profile Index: 0
+[11/12/2026-22:42:13] [I] Weight Streaming Budget: 100.000000%
+[11/12/2026-22:42:13] [I] Accuracy Algorithm: L0
+[11/12/2026-22:42:13] [I] Absolute Tolerance (atol): 1e-05
+[11/12/2026-22:42:13] [I] Relative Tolerance (rtol): 1e-05
+[11/12/2026-22:42:13] [I] Inputs:
+[11/12/2026-22:42:13] [I] Debug Tensor Save Destinations:
+[11/12/2026-22:42:13] [I] Dump All Debug Tensor in Formats: 
+[11/12/2026-22:42:13] [I] === Reporting Options ===
+[11/12/2026-22:42:13] [I] Verbose: Disabled
+[11/12/2026-22:42:13] [I] Averages: 10 inferences
+[11/12/2026-22:42:13] [I] Percentiles: 90,95,99
+[11/12/2026-22:42:13] [I] Dump refittable layers:Disabled
+[11/12/2026-22:42:13] [I] Dump output: Disabled
+[11/12/2026-22:42:13] [I] Profile: Enabled
+[11/12/2026-22:42:13] [I] Export timing to JSON file: 
+[11/12/2026-22:42:13] [I] Export output to JSON file: 
+[11/12/2026-22:42:13] [I] Export profile to JSON file: 
+[11/12/2026-22:42:13] [I] 
+[11/12/2026-22:42:13] [I] === Device Information ===
+[11/12/2026-22:42:13] [I] Available Devices: 
+[11/12/2026-22:42:13] [I]   Device 0: "NVIDIA GeForce RTX 5090" UUID: GPU-700442a4-6f8e-87a2-df57-45bfeb09b34f
+[11/12/2026-22:42:13] [I] Selected Device: NVIDIA GeForce RTX 5090
+[11/12/2026-22:42:13] [I] Selected Device ID: 0
+[11/12/2026-22:42:13] [I] Selected Device UUID: GPU-700442a4-6f8e-87a2-df57-45bfeb09b34f
+[11/12/2026-22:42:13] [I] Compute Capability: 12.0
+[11/12/2026-22:42:13] [I] SMs: 170
+[11/12/2026-22:42:13] [I] Device Global Memory: 32606 MiB
+[11/12/2026-22:42:13] [I] Shared Memory per SM: 100 KiB
+[11/12/2026-22:42:13] [I] Memory Bus Width: 512 bits (ECC disabled)
+[11/12/2026-22:42:13] [I] Application Compute Clock Rate: 2.407 GHz
+[11/12/2026-22:42:13] [I] Application Memory Clock Rate: 14.001 GHz
+[11/12/2026-22:42:13] [I] 
+[11/12/2026-22:42:13] [I] Note: The application clock rates do not reflect the actual clock rates that the GPU is currently running at.
+[11/12/2026-22:42:13] [I] 
+[11/12/2026-22:42:13] [I] TensorRT version: 11.4.0
+[11/12/2026-22:42:13] [I] Loading standard plugins
+[11/12/2026-22:42:15] [I] Engine deserialized in 1.41622 sec.
+[11/12/2026-22:42:15] [I] [TRT] [MemUsageChange] TensorRT-managed allocation in IExecutionContext creation: CPU +0, GPU +134, now: CPU 0, GPU 551 (MiB)
+[11/12/2026-22:42:15] [I] Setting persistentCacheLimit to 0 bytes.
+[11/12/2026-22:42:15] [I] Set shape of input tensor input_ids to: 1x128
+[11/12/2026-22:42:15] [I] Set shape of input tensor attention_mask to: 1x128
+[11/12/2026-22:42:15] [I] Created execution context with device memory size: 134.028 MiB
+[11/12/2026-22:42:15] [I] Using random values for input input_ids
+[11/12/2026-22:42:15] [I] Input binding for input_ids with dimensions 1x128 and type int64 is created.
+[11/12/2026-22:42:15] [I] Using random values for input attention_mask
+[11/12/2026-22:42:15] [I] Input binding for attention_mask with dimensions 1x128 and type int64 is created.
+[11/12/2026-22:42:15] [I] Output binding for last_hidden_state with dimensions 1x128x768 and type fp32 is created.
+[11/12/2026-22:42:15] [I] Output binding for pooler_output with dimensions 1x768 and type fp32 is created.
+[11/12/2026-22:42:15] [I] Starting inference
+[11/12/2026-22:42:15] [I] Capturing CUDA graph for the current execution context
+[11/12/2026-22:42:15] [I] Successfully captured CUDA graph for the current execution context. When profiling with Nsight Systems, add "--cuda-graph-trace=node" to the nsys command to see per-kernel execution times.
+[11/12/2026-22:42:18] [I] Warmup completed 14 queries over 50 ms
+[11/12/2026-22:42:18] [I] Timing trace has 2268 queries over 3.00318 s
+[11/12/2026-22:42:18] [I] 
+[11/12/2026-22:42:18] [I] === Trace details ===
+[11/12/2026-22:42:18] [I] Trace averages of 10 runs:
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32265 ms - Host latency: 1.32265 ms (enqueue 0.0728149 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.3217 ms - Host latency: 1.3217 ms (enqueue 0.074268 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32186 ms - Host latency: 1.32186 ms (enqueue 0.126832 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32089 ms - Host latency: 1.32089 ms (enqueue 0.390292 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32127 ms - Host latency: 1.32127 ms (enqueue 0.323822 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32112 ms - Host latency: 1.32112 ms (enqueue 0.352518 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32167 ms - Host latency: 1.32167 ms (enqueue 0.339203 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32096 ms - Host latency: 1.32096 ms (enqueue 0.370044 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32103 ms - Host latency: 1.32103 ms (enqueue 0.279131 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32258 ms - Host latency: 1.32258 ms (enqueue 0.294096 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32161 ms - Host latency: 1.32161 ms (enqueue 0.319853 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32204 ms - Host latency: 1.32204 ms (enqueue 0.0871994 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32216 ms - Host latency: 1.32216 ms (enqueue 0.0743835 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32264 ms - Host latency: 1.32264 ms (enqueue 0.081015 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32169 ms - Host latency: 1.32169 ms (enqueue 0.0800278 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32145 ms - Host latency: 1.32145 ms (enqueue 0.162 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32074 ms - Host latency: 1.32074 ms (enqueue 0.285962 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32186 ms - Host latency: 1.32186 ms (enqueue 0.268149 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32171 ms - Host latency: 1.32171 ms (enqueue 0.291696 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32057 ms - Host latency: 1.32057 ms (enqueue 0.132053 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32158 ms - Host latency: 1.32158 ms (enqueue 0.203564 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32266 ms - Host latency: 1.32266 ms (enqueue 0.315057 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32072 ms - Host latency: 1.32072 ms (enqueue 0.325504 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32097 ms - Host latency: 1.32097 ms (enqueue 0.301996 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32226 ms - Host latency: 1.32226 ms (enqueue 0.0803497 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32134 ms - Host latency: 1.32134 ms (enqueue 0.0939484 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32209 ms - Host latency: 1.32209 ms (enqueue 0.47009 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32218 ms - Host latency: 1.32218 ms (enqueue 0.463708 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32148 ms - Host latency: 1.32148 ms (enqueue 0.341925 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32195 ms - Host latency: 1.32195 ms (enqueue 0.287238 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32245 ms - Host latency: 1.32245 ms (enqueue 0.299377 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32129 ms - Host latency: 1.32129 ms (enqueue 0.0897858 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32198 ms - Host latency: 1.32198 ms (enqueue 0.0805939 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32108 ms - Host latency: 1.32108 ms (enqueue 0.0822449 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32204 ms - Host latency: 1.32204 ms (enqueue 0.0783203 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32164 ms - Host latency: 1.32164 ms (enqueue 0.166711 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32176 ms - Host latency: 1.32176 ms (enqueue 0.310486 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32122 ms - Host latency: 1.32122 ms (enqueue 0.293286 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32158 ms - Host latency: 1.32158 ms (enqueue 0.300177 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32162 ms - Host latency: 1.32162 ms (enqueue 0.105371 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32169 ms - Host latency: 1.32169 ms (enqueue 0.0844727 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32142 ms - Host latency: 1.32142 ms (enqueue 0.0809143 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32073 ms - Host latency: 1.32073 ms (enqueue 0.0788269 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32247 ms - Host latency: 1.32247 ms (enqueue 0.173718 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32195 ms - Host latency: 1.32195 ms (enqueue 0.30802 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32203 ms - Host latency: 1.32203 ms (enqueue 0.085199 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32157 ms - Host latency: 1.32157 ms (enqueue 0.294354 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32144 ms - Host latency: 1.32144 ms (enqueue 0.295801 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32127 ms - Host latency: 1.32127 ms (enqueue 0.318597 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32195 ms - Host latency: 1.32195 ms (enqueue 0.305823 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32187 ms - Host latency: 1.32187 ms (enqueue 0.348737 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32155 ms - Host latency: 1.32155 ms (enqueue 0.308679 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32163 ms - Host latency: 1.32163 ms (enqueue 0.281799 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32033 ms - Host latency: 1.32033 ms (enqueue 0.316394 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32024 ms - Host latency: 1.32024 ms (enqueue 0.344269 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32196 ms - Host latency: 1.32196 ms (enqueue 0.307422 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32186 ms - Host latency: 1.32186 ms (enqueue 0.32218 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32175 ms - Host latency: 1.32175 ms (enqueue 0.313806 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32206 ms - Host latency: 1.32206 ms (enqueue 0.284235 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.33853 ms - Host latency: 1.33853 ms (enqueue 0.316376 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32118 ms - Host latency: 1.32118 ms (enqueue 0.51684 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32161 ms - Host latency: 1.32161 ms (enqueue 0.543103 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.321 ms - Host latency: 1.321 ms (enqueue 0.357513 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32105 ms - Host latency: 1.32105 ms (enqueue 0.343793 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32194 ms - Host latency: 1.32194 ms (enqueue 0.293756 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32106 ms - Host latency: 1.32106 ms (enqueue 0.287787 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.35964 ms - Host latency: 1.35964 ms (enqueue 0.416028 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32147 ms - Host latency: 1.32147 ms (enqueue 0.329651 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32197 ms - Host latency: 1.32197 ms (enqueue 0.259839 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32229 ms - Host latency: 1.32229 ms (enqueue 0.332599 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.3213 ms - Host latency: 1.3213 ms (enqueue 0.315955 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32104 ms - Host latency: 1.32104 ms (enqueue 0.321021 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32176 ms - Host latency: 1.32176 ms (enqueue 0.321405 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32145 ms - Host latency: 1.32145 ms (enqueue 0.175775 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32228 ms - Host latency: 1.32228 ms (enqueue 0.0833496 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32202 ms - Host latency: 1.32202 ms (enqueue 0.0805054 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32224 ms - Host latency: 1.32224 ms (enqueue 0.126538 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32195 ms - Host latency: 1.32195 ms (enqueue 0.333386 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32107 ms - Host latency: 1.32107 ms (enqueue 0.348303 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32196 ms - Host latency: 1.32196 ms (enqueue 0.289478 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32187 ms - Host latency: 1.32187 ms (enqueue 0.330627 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32173 ms - Host latency: 1.32173 ms (enqueue 0.367249 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32454 ms - Host latency: 1.32454 ms (enqueue 0.406909 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32311 ms - Host latency: 1.32311 ms (enqueue 0.379187 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32106 ms - Host latency: 1.32106 ms (enqueue 0.347473 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32313 ms - Host latency: 1.32313 ms (enqueue 0.107446 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.34337 ms - Host latency: 1.34337 ms (enqueue 0.633923 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32111 ms - Host latency: 1.32111 ms (enqueue 0.533252 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32145 ms - Host latency: 1.32145 ms (enqueue 0.367285 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32118 ms - Host latency: 1.32118 ms (enqueue 0.289294 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32134 ms - Host latency: 1.32134 ms (enqueue 0.0918823 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32124 ms - Host latency: 1.32124 ms (enqueue 0.321985 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32113 ms - Host latency: 1.32113 ms (enqueue 0.321338 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32164 ms - Host latency: 1.32164 ms (enqueue 0.259583 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32155 ms - Host latency: 1.32155 ms (enqueue 0.251782 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32186 ms - Host latency: 1.32186 ms (enqueue 0.333936 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32156 ms - Host latency: 1.32156 ms (enqueue 0.351526 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32191 ms - Host latency: 1.32191 ms (enqueue 0.332971 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32126 ms - Host latency: 1.32126 ms (enqueue 0.297156 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32124 ms - Host latency: 1.32124 ms (enqueue 0.167444 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32177 ms - Host latency: 1.32177 ms (enqueue 0.0791382 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32267 ms - Host latency: 1.32267 ms (enqueue 0.0893433 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32201 ms - Host latency: 1.32201 ms (enqueue 0.112817 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.3213 ms - Host latency: 1.3213 ms (enqueue 0.308154 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32111 ms - Host latency: 1.32111 ms (enqueue 0.297388 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32217 ms - Host latency: 1.32217 ms (enqueue 0.304663 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32128 ms - Host latency: 1.32128 ms (enqueue 0.318774 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32152 ms - Host latency: 1.32152 ms (enqueue 0.302576 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32189 ms - Host latency: 1.32189 ms (enqueue 0.313928 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32213 ms - Host latency: 1.32213 ms (enqueue 0.322253 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32147 ms - Host latency: 1.32147 ms (enqueue 0.314795 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32115 ms - Host latency: 1.32115 ms (enqueue 0.320166 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32225 ms - Host latency: 1.32225 ms (enqueue 0.312317 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32126 ms - Host latency: 1.32126 ms (enqueue 0.312512 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32115 ms - Host latency: 1.32115 ms (enqueue 0.342639 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32208 ms - Host latency: 1.32208 ms (enqueue 0.305774 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32087 ms - Host latency: 1.32087 ms (enqueue 0.285901 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32123 ms - Host latency: 1.32123 ms (enqueue 0.313147 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32153 ms - Host latency: 1.32153 ms (enqueue 0.117017 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32139 ms - Host latency: 1.32139 ms (enqueue 0.0782837 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32288 ms - Host latency: 1.32288 ms (enqueue 0.076062 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.3212 ms - Host latency: 1.3212 ms (enqueue 0.154541 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.3218 ms - Host latency: 1.3218 ms (enqueue 0.286047 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32124 ms - Host latency: 1.32124 ms (enqueue 0.327222 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32115 ms - Host latency: 1.32115 ms (enqueue 0.277576 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32043 ms - Host latency: 1.32043 ms (enqueue 0.291528 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32208 ms - Host latency: 1.32208 ms (enqueue 0.309119 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32075 ms - Host latency: 1.32075 ms (enqueue 0.36217 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32203 ms - Host latency: 1.32203 ms (enqueue 0.313928 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32075 ms - Host latency: 1.32075 ms (enqueue 0.335144 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32269 ms - Host latency: 1.32269 ms (enqueue 0.343469 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32258 ms - Host latency: 1.32258 ms (enqueue 0.320776 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32205 ms - Host latency: 1.32205 ms (enqueue 0.32959 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32235 ms - Host latency: 1.32235 ms (enqueue 0.3224 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32123 ms - Host latency: 1.32123 ms (enqueue 0.397168 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32134 ms - Host latency: 1.32134 ms (enqueue 0.44071 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32206 ms - Host latency: 1.32206 ms (enqueue 0.313757 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32095 ms - Host latency: 1.32095 ms (enqueue 0.328918 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32102 ms - Host latency: 1.32102 ms (enqueue 0.325928 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32186 ms - Host latency: 1.32186 ms (enqueue 0.322327 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32155 ms - Host latency: 1.32155 ms (enqueue 0.320142 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32084 ms - Host latency: 1.32084 ms (enqueue 0.258728 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32178 ms - Host latency: 1.32178 ms (enqueue 0.230371 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32107 ms - Host latency: 1.32107 ms (enqueue 0.317932 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32194 ms - Host latency: 1.32194 ms (enqueue 0.328394 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.33315 ms - Host latency: 1.33315 ms (enqueue 0.288745 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32166 ms - Host latency: 1.32166 ms (enqueue 0.76095 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32174 ms - Host latency: 1.32174 ms (enqueue 0.333044 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32228 ms - Host latency: 1.32228 ms (enqueue 0.3125 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32157 ms - Host latency: 1.32157 ms (enqueue 0.32395 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32074 ms - Host latency: 1.32074 ms (enqueue 0.243433 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32173 ms - Host latency: 1.32173 ms (enqueue 0.119312 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32222 ms - Host latency: 1.32222 ms (enqueue 0.0922119 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.33308 ms - Host latency: 1.33308 ms (enqueue 0.0795166 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32197 ms - Host latency: 1.32197 ms (enqueue 0.0815186 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32139 ms - Host latency: 1.32139 ms (enqueue 0.177222 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32039 ms - Host latency: 1.32039 ms (enqueue 0.294336 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32058 ms - Host latency: 1.32058 ms (enqueue 0.306519 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32275 ms - Host latency: 1.32275 ms (enqueue 0.0912354 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32197 ms - Host latency: 1.32197 ms (enqueue 0.0824707 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32288 ms - Host latency: 1.32288 ms (enqueue 0.0880615 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32146 ms - Host latency: 1.32146 ms (enqueue 0.0816406 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32148 ms - Host latency: 1.32148 ms (enqueue 0.0869141 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32058 ms - Host latency: 1.32058 ms (enqueue 0.0823975 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32104 ms - Host latency: 1.32104 ms (enqueue 0.334717 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32146 ms - Host latency: 1.32146 ms (enqueue 0.33269 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32192 ms - Host latency: 1.32192 ms (enqueue 0.318018 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32205 ms - Host latency: 1.32205 ms (enqueue 0.249536 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32114 ms - Host latency: 1.32114 ms (enqueue 0.139551 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32124 ms - Host latency: 1.32124 ms (enqueue 0.305396 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32153 ms - Host latency: 1.32153 ms (enqueue 0.567285 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32251 ms - Host latency: 1.32251 ms (enqueue 0.327783 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32224 ms - Host latency: 1.32224 ms (enqueue 0.294067 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32114 ms - Host latency: 1.32114 ms (enqueue 0.322754 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32139 ms - Host latency: 1.32139 ms (enqueue 0.314771 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32117 ms - Host latency: 1.32117 ms (enqueue 0.333447 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32087 ms - Host latency: 1.32087 ms (enqueue 0.326245 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32148 ms - Host latency: 1.32148 ms (enqueue 0.310742 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32102 ms - Host latency: 1.32102 ms (enqueue 0.318994 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32112 ms - Host latency: 1.32112 ms (enqueue 0.321143 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32227 ms - Host latency: 1.32227 ms (enqueue 0.278052 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32036 ms - Host latency: 1.32036 ms (enqueue 0.314453 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32168 ms - Host latency: 1.32168 ms (enqueue 0.30481 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32112 ms - Host latency: 1.32112 ms (enqueue 0.244531 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.3217 ms - Host latency: 1.3217 ms (enqueue 0.323291 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32246 ms - Host latency: 1.32246 ms (enqueue 0.150684 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32095 ms - Host latency: 1.32095 ms (enqueue 0.209937 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32146 ms - Host latency: 1.32146 ms (enqueue 0.317261 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32058 ms - Host latency: 1.32058 ms (enqueue 0.329785 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32085 ms - Host latency: 1.32085 ms (enqueue 0.638013 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32075 ms - Host latency: 1.32075 ms (enqueue 0.324829 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32141 ms - Host latency: 1.32141 ms (enqueue 0.332593 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32117 ms - Host latency: 1.32117 ms (enqueue 0.309497 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32244 ms - Host latency: 1.32244 ms (enqueue 0.161206 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32092 ms - Host latency: 1.32092 ms (enqueue 0.132495 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32126 ms - Host latency: 1.32126 ms (enqueue 0.316138 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32214 ms - Host latency: 1.32214 ms (enqueue 0.335913 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32129 ms - Host latency: 1.32129 ms (enqueue 0.320239 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32124 ms - Host latency: 1.32124 ms (enqueue 0.341577 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32153 ms - Host latency: 1.32153 ms (enqueue 0.230713 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32126 ms - Host latency: 1.32126 ms (enqueue 0.334595 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32151 ms - Host latency: 1.32151 ms (enqueue 0.353345 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32173 ms - Host latency: 1.32173 ms (enqueue 0.316162 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32214 ms - Host latency: 1.32214 ms (enqueue 0.325659 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32205 ms - Host latency: 1.32205 ms (enqueue 0.316943 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32134 ms - Host latency: 1.32134 ms (enqueue 0.320288 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32083 ms - Host latency: 1.32083 ms (enqueue 0.319873 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32134 ms - Host latency: 1.32134 ms (enqueue 0.343628 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32056 ms - Host latency: 1.32056 ms (enqueue 0.589282 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32354 ms - Host latency: 1.32354 ms (enqueue 0.352124 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32378 ms - Host latency: 1.32378 ms (enqueue 0.301562 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32324 ms - Host latency: 1.32324 ms (enqueue 0.185352 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32329 ms - Host latency: 1.32329 ms (enqueue 0.0850342 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32302 ms - Host latency: 1.32302 ms (enqueue 0.0796387 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32317 ms - Host latency: 1.32317 ms (enqueue 0.0761963 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32371 ms - Host latency: 1.32371 ms (enqueue 0.285327 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32356 ms - Host latency: 1.32356 ms (enqueue 0.124194 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.3231 ms - Host latency: 1.3231 ms (enqueue 0.116968 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32385 ms - Host latency: 1.32385 ms (enqueue 0.211597 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32373 ms - Host latency: 1.32373 ms (enqueue 0.332715 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32361 ms - Host latency: 1.32361 ms (enqueue 0.280103 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32336 ms - Host latency: 1.32336 ms (enqueue 0.0884766 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32319 ms - Host latency: 1.32319 ms (enqueue 0.0809082 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32371 ms - Host latency: 1.32371 ms (enqueue 0.0937988 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32346 ms - Host latency: 1.32346 ms (enqueue 0.246704 ms)
+[11/12/2026-22:42:18] [I] Average on 10 runs - GPU latency: 1.32305 ms - Host latency: 1.32305 ms (enqueue 0.262964 ms)
+[11/12/2026-22:42:18] [I] 
+[11/12/2026-22:42:18] [I] === Performance summary ===
+[11/12/2026-22:42:18] [I] Throughput: 755.2 qps
+[11/12/2026-22:42:18] [I] Latency: min = 1.31396 ms, max = 1.63354 ms, mean = 1.32218 ms, median = 1.32202 ms, percentile(90%) = 1.32413 ms, percentile(95%) = 1.32483 ms, percentile(99%) = 1.32587 ms
+[11/12/2026-22:42:18] [I] Enqueue Time: min = 0.0594482 ms, max = 1.16382 ms, mean = 0.269866 ms, median = 0.308228 ms, percentile(90%) = 0.352783 ms, percentile(95%) = 0.430786 ms, percentile(99%) = 0.846191 ms
+[11/12/2026-22:42:18] [I] H2D Latency: min = 0 ms, max = 0 ms, mean = 0 ms, median = 0 ms, percentile(90%) = 0 ms, percentile(95%) = 0 ms, percentile(99%) = 0 ms
+[11/12/2026-22:42:18] [I] GPU Compute Time: min = 1.31396 ms, max = 1.63354 ms, mean = 1.32218 ms, median = 1.32202 ms, percentile(90%) = 1.32413 ms, percentile(95%) = 1.32483 ms, percentile(99%) = 1.32587 ms
+[11/12/2026-22:42:18] [I] D2H Latency: min = 0 ms, max = 0 ms, mean = 0 ms, median = 0 ms, percentile(90%) = 0 ms, percentile(95%) = 0 ms, percentile(99%) = 0 ms
+[11/12/2026-22:42:18] [I] Total Host Walltime: 3.00318 s
+[11/12/2026-22:42:18] [I] Total GPU Compute Time: 2.99869 s
+[11/12/2026-22:42:18] [I] Explanations of the performance metrics are printed in the verbose logs.
+[11/12/2026-22:42:18] [I] 
+[11/12/2026-22:42:18] [I] Capturing CUDA graph for the current execution context
+[11/12/2026-22:42:18] [I] Successfully captured CUDA graph for the current execution context. When profiling with Nsight Systems, add "--cuda-graph-trace=node" to the nsys command to see per-kernel execution times.
+[11/12/2026-22:42:22] [I] 
+[11/12/2026-22:42:22] [I] === Profile (572 iterations ) ===
+[11/12/2026-22:42:22] [I]    Time(ms)     Avg.(ms)   Median(ms)   Time(%)   Layer
+[11/12/2026-22:42:22] [I]       22.60       0.0395       0.0396       0.7   __mye17619_0_myl0_0
+[11/12/2026-22:42:22] [I]       22.89       0.0400       0.0399       0.7   __myl_CastGathCastReplGathGathReshReshAddReshGathAddReshMeanSubMulMean_myl0_1
+[11/12/2026-22:42:22] [I]       21.08       0.0369       0.0369       0.6   __myl_AddSqrtDivMulMulAddReshTran_myl0_2
+[11/12/2026-22:42:22] [I]       35.54       0.0621       0.0621       1.1   __mye56869+__mye56857+__mye56845_myl0_3
+[11/12/2026-22:42:22] [I]       21.73       0.0380       0.0380       0.7   __mye83235_myl0_4
+[11/12/2026-22:42:22] [I]        1.15       0.0020       0.0020       0.0   cast_hvar^83231i64_myl0_5
+[11/12/2026-22:42:22] [I]        2.00       0.0035       0.0035       0.1   __mye83254_myl0_6
+[11/12/2026-22:42:22] [I]       20.40       0.0357       0.0356       0.6   cast_hvar^83250i64_myl0_7
+[11/12/2026-22:42:22] [I]       22.50       0.0393       0.0394       0.7   /model/encoder/layer.0/attention/self/MatMul_myl0_8
+[11/12/2026-22:42:22] [I]       29.47       0.0515       0.0516       0.9   __myl_CastReshIotaCastReshReshEqlGtrOrIotaCastReshMulAddCastGathReshAndSlicReplSeleMulAddMaxrSubEtc_myl0_9
+[11/12/2026-22:42:22] [I]        6.50       0.0114       0.0114       0.2   /model/encoder/layer.0/attention/self/MatMul_1_myl0_10
+[11/12/2026-22:42:22] [I]       41.87       0.0732       0.0733       1.3   __myl_Tran_myl0_11
+[11/12/2026-22:42:22] [I]       14.53       0.0254       0.0253       0.4   /model/encoder/layer.0/attention/output/dense/MatMul_myl0_12
+[11/12/2026-22:42:22] [I]       21.61       0.0378       0.0378       0.7   __myl_AddMeanSubMulMeanAddSqrtDivMulMulAdd_myl0_13
+[11/12/2026-22:42:22] [I]       12.23       0.0214       0.0213       0.4   /model/encoder/layer.0/intermediate/dense/MatMul_myl0_14
+[11/12/2026-22:42:22] [I]        4.32       0.0075       0.0076       0.1   __myl_DivErfAddMulMul_myl0_15
+[11/12/2026-22:42:22] [I]       39.45       0.0690       0.0689       1.2   /model/encoder/layer.0/output/dense/MatMul_myl0_16
+[11/12/2026-22:42:22] [I]       23.56       0.0412       0.0412       0.7   __myl_AddMeanSubMulMean_myl0_17
+[11/12/2026-22:42:22] [I]        4.41       0.0077       0.0077       0.1   __myl_AddSqrtDivMulMulAddReshTran_myl0_18
+[11/12/2026-22:42:22] [I]       15.48       0.0271       0.0271       0.5   __mye56963+__mye56951+__mye56939_myl0_19
+[11/12/2026-22:42:22] [I]       22.64       0.0396       0.0396       0.7   __mye83197_myl0_20
+[11/12/2026-22:42:22] [I]        1.14       0.0020       0.0020       0.0   cast_hvar^83193i64_myl0_21
+[11/12/2026-22:42:22] [I]        1.14       0.0020       0.0019       0.0   __mye83216_myl0_22
+[11/12/2026-22:42:22] [I]        1.56       0.0027       0.0027       0.0   cast_hvar^83212i64_myl0_23
+[11/12/2026-22:42:22] [I]        6.50       0.0114       0.0113       0.2   /model/encoder/layer.1/attention/self/MatMul_myl0_24
+[11/12/2026-22:42:22] [I]       26.83       0.0469       0.0469       0.8   __myl_MulAddMaxrSubExpSumDivMul_myl0_25
+[11/12/2026-22:42:22] [I]        6.41       0.0112       0.0111       0.2   /model/encoder/layer.1/attention/self/MatMul_1_myl0_26
+[11/12/2026-22:42:22] [I]       24.14       0.0422       0.0422       0.7   __myl_Tran_myl0_27
+[11/12/2026-22:42:22] [I]       14.65       0.0256       0.0255       0.4   /model/encoder/layer.1/attention/output/dense/MatMul_myl0_28
+[11/12/2026-22:42:22] [I]        4.12       0.0072       0.0072       0.1   __myl_AddMeanSubMulMeanAddSqrtDivMulMulAdd_myl0_29
+[11/12/2026-22:42:22] [I]       30.51       0.0533       0.0533       0.9   /model/encoder/layer.1/intermediate/dense/MatMul_myl0_30
+[11/12/2026-22:42:22] [I]        3.94       0.0069       0.0069       0.1   __myl_DivErfAddMulMul_myl0_31
+[11/12/2026-22:42:22] [I]       20.39       0.0356       0.0356       0.6   /model/encoder/layer.1/output/dense/MatMul_myl0_32
+[11/12/2026-22:42:22] [I]       21.17       0.0370       0.0371       0.6   __myl_AddMeanSubMulMean_myl0_33
+[11/12/2026-22:42:22] [I]       23.30       0.0407       0.0408       0.7   __myl_AddSqrtDivMulMulAddReshTran_myl0_34
+[11/12/2026-22:42:22] [I]       15.20       0.0266       0.0265       0.5   __mye57057+__mye57045+__mye57033_myl0_35
+[11/12/2026-22:42:22] [I]        1.17       0.0020       0.0020       0.0   __mye83159_myl0_36
+[11/12/2026-22:42:22] [I]        1.13       0.0020       0.0020       0.0   cast_hvar^83155i64_myl0_37
+[11/12/2026-22:42:22] [I]       21.14       0.0370       0.0370       0.6   __mye83178_myl0_38
+[11/12/2026-22:42:22] [I]        1.45       0.0025       0.0025       0.0   cast_hvar^83174i64_myl0_39
+[11/12/2026-22:42:22] [I]       22.23       0.0389       0.0389       0.7   /model/encoder/layer.2/attention/self/MatMul_myl0_40
+[11/12/2026-22:42:22] [I]        3.96       0.0069       0.0069       0.1   __myl_MulAddMaxrSubExpSumDivMul_myl0_41
+[11/12/2026-22:42:22] [I]       24.68       0.0431       0.0432       0.7   /model/encoder/layer.2/attention/self/MatMul_1_myl0_42
+[11/12/2026-22:42:22] [I]        2.77       0.0048       0.0048       0.1   __myl_Tran_myl0_43
+[11/12/2026-22:42:22] [I]       18.46       0.0323       0.0323       0.6   /model/encoder/layer.2/attention/output/dense/MatMul_myl0_44
+[11/12/2026-22:42:22] [I]       21.09       0.0369       0.0369       0.6   __myl_AddMeanSubMulMeanAddSqrtDivMulMulAdd_myl0_45
+[11/12/2026-22:42:22] [I]       12.07       0.0211       0.0211       0.4   /model/encoder/layer.2/intermediate/dense/MatMul_myl0_46
+[11/12/2026-22:42:22] [I]       26.42       0.0462       0.0462       0.8   __myl_DivErfAddMulMul_myl0_47
+[11/12/2026-22:42:22] [I]       18.03       0.0315       0.0315       0.5   /model/encoder/layer.2/output/dense/MatMul_myl0_48
+[11/12/2026-22:42:22] [I]       20.60       0.0360       0.0361       0.6   __myl_AddMeanSubMulMean_myl0_49
+[11/12/2026-22:42:22] [I]       44.31       0.0775       0.0776       1.3   __myl_AddSqrtDivMulMulAddReshTran_myl0_50
+[11/12/2026-22:42:22] [I]       15.10       0.0264       0.0264       0.5   __mye57151+__mye57139+__mye57127_myl0_51
+[11/12/2026-22:42:22] [I]        1.19       0.0021       0.0021       0.0   __mye83121_myl0_52
+[11/12/2026-22:42:22] [I]        1.47       0.0026       0.0026       0.0   cast_hvar^83117i64_myl0_53
+[11/12/2026-22:42:22] [I]        1.49       0.0026       0.0025       0.0   __mye83140_myl0_54
+[11/12/2026-22:42:22] [I]        1.18       0.0021       0.0020       0.0   cast_hvar^83136i64_myl0_55
+[11/12/2026-22:42:22] [I]       24.91       0.0436       0.0436       0.8   /model/encoder/layer.3/attention/self/MatMul_myl0_56
+[11/12/2026-22:42:22] [I]        3.63       0.0063       0.0063       0.1   __myl_MulAddMaxrSubExpSumDivMul_myl0_57
+[11/12/2026-22:42:22] [I]       25.19       0.0440       0.0440       0.8   /model/encoder/layer.3/attention/self/MatMul_1_myl0_58
+[11/12/2026-22:42:22] [I]        2.85       0.0050       0.0049       0.1   __myl_Tran_myl0_59
+[11/12/2026-22:42:22] [I]       14.01       0.0245       0.0244       0.4   /model/encoder/layer.3/attention/output/dense/MatMul_myl0_60
+[11/12/2026-22:42:22] [I]       18.64       0.0326       0.0326       0.6   __myl_AddMeanSubMulMeanAddSqrtDivMulMulAdd_myl0_61
+[11/12/2026-22:42:22] [I]       35.40       0.0619       0.0618       1.1   /model/encoder/layer.3/intermediate/dense/MatMul_myl0_62
+[11/12/2026-22:42:22] [I]        3.58       0.0063       0.0062       0.1   __myl_DivErfAddMulMul_myl0_63
+[11/12/2026-22:42:22] [I]       20.71       0.0362       0.0361       0.6   /model/encoder/layer.3/output/dense/MatMul_myl0_64
+[11/12/2026-22:42:22] [I]       26.52       0.0464       0.0464       0.8   __myl_AddMeanSubMulMean_myl0_65
+[11/12/2026-22:42:22] [I]        3.37       0.0059       0.0058       0.1   __myl_AddSqrtDivMulMulAddReshTran_myl0_66
+[11/12/2026-22:42:22] [I]       32.77       0.0573       0.0573       1.0   __mye57245+__mye57233+__mye57221_myl0_67
+[11/12/2026-22:42:22] [I]        1.39       0.0024       0.0024       0.0   __mye83083_myl0_68
+[11/12/2026-22:42:22] [I]        1.17       0.0020       0.0020       0.0   cast_hvar^83079i64_myl0_69
+[11/12/2026-22:42:22] [I]        1.26       0.0022       0.0022       0.0   __mye83102_myl0_70
+[11/12/2026-22:42:22] [I]        1.20       0.0021       0.0020       0.0   cast_hvar^83098i64_myl0_71
+[11/12/2026-22:42:22] [I]        5.84       0.0102       0.0102       0.2   /model/encoder/layer.4/attention/self/MatMul_myl0_72
+[11/12/2026-22:42:22] [I]       20.82       0.0364       0.0364       0.6   __myl_MulAddMaxrSubExpSumDivMul_myl0_73
+[11/12/2026-22:42:22] [I]        5.33       0.0093       0.0092       0.2   /model/encoder/layer.4/attention/self/MatMul_1_myl0_74
+[11/12/2026-22:42:22] [I]        2.57       0.0045       0.0044       0.1   __myl_Tran_myl0_75
+[11/12/2026-22:42:22] [I]       15.26       0.0267       0.0266       0.5   /model/encoder/layer.4/attention/output/dense/MatMul_myl0_76
+[11/12/2026-22:42:22] [I]       28.88       0.0505       0.0505       0.9   __myl_AddMeanSubMulMeanAddSqrtDivMulMulAdd_myl0_77
+[11/12/2026-22:42:22] [I]       35.30       0.0617       0.0617       1.1   /model/encoder/layer.4/intermediate/dense/MatMul_myl0_78
+[11/12/2026-22:42:22] [I]        5.21       0.0091       0.0090       0.2   __myl_DivErfAddMulMul_myl0_79
+[11/12/2026-22:42:22] [I]       39.32       0.0687       0.0687       1.2   /model/encoder/layer.4/output/dense/MatMul_myl0_80
+[11/12/2026-22:42:22] [I]        2.99       0.0052       0.0051       0.1   __myl_AddMeanSubMulMean_myl0_81
+[11/12/2026-22:42:22] [I]       21.99       0.0384       0.0384       0.7   __myl_AddSqrtDivMulMulAddReshTran_myl0_82
+[11/12/2026-22:42:22] [I]       14.75       0.0258       0.0257       0.4   __mye57339+__mye57327+__mye57315_myl0_83
+[11/12/2026-22:42:22] [I]        5.69       0.0099       0.0099       0.2   __mye83045_myl0_84
+[11/12/2026-22:42:22] [I]        1.78       0.0031       0.0031       0.1   cast_hvar^83041i64_myl0_85
+[11/12/2026-22:42:22] [I]        1.61       0.0028       0.0028       0.0   __mye83064_myl0_86
+[11/12/2026-22:42:22] [I]       20.98       0.0367       0.0367       0.6   cast_hvar^83060i64_myl0_87
+[11/12/2026-22:42:22] [I]        5.40       0.0094       0.0094       0.2   /model/encoder/layer.5/attention/self/MatMul_myl0_88
+[11/12/2026-22:42:22] [I]        4.38       0.0077       0.0076       0.1   __myl_MulAddMaxrSubExpSumDivMul_myl0_89
+[11/12/2026-22:42:22] [I]       31.46       0.0550       0.0550       1.0   /model/encoder/layer.5/attention/self/MatMul_1_myl0_90
+[11/12/2026-22:42:22] [I]        2.67       0.0047       0.0047       0.1   __myl_Tran_myl0_91
+[11/12/2026-22:42:22] [I]       14.51       0.0254       0.0254       0.4   /model/encoder/layer.5/attention/output/dense/MatMul_myl0_92
+[11/12/2026-22:42:22] [I]       19.76       0.0345       0.0345       0.6   __myl_AddMeanSubMulMeanAddSqrtDivMulMulAdd_myl0_93
+[11/12/2026-22:42:22] [I]       34.73       0.0607       0.0607       1.1   /model/encoder/layer.5/intermediate/dense/MatMul_myl0_94
+[11/12/2026-22:42:22] [I]        4.14       0.0072       0.0072       0.1   __myl_DivErfAddMulMul_myl0_95
+[11/12/2026-22:42:22] [I]       36.30       0.0635       0.0632       1.1   /model/encoder/layer.5/output/dense/MatMul_myl0_96
+[11/12/2026-22:42:22] [I]        3.83       0.0067       0.0066       0.1   __myl_AddMeanSubMulMean_myl0_97
+[11/12/2026-22:42:22] [I]       19.56       0.0342       0.0342       0.6   __myl_AddSqrtDivMulMulAddReshTran_myl0_98
+[11/12/2026-22:42:22] [I]       18.10       0.0316       0.0316       0.5   __mye57433+__mye57421+__mye57409_myl0_99
+[11/12/2026-22:42:22] [I]        1.43       0.0025       0.0025       0.0   __mye83007_myl0_100
+[11/12/2026-22:42:22] [I]       16.29       0.0285       0.0284       0.5   cast_hvar^83003i64_myl0_101
+[11/12/2026-22:42:22] [I]        1.26       0.0022       0.0021       0.0   __mye83026_myl0_102
+[11/12/2026-22:42:22] [I]       21.99       0.0384       0.0384       0.7   cast_hvar^83022i64_myl0_103
+[11/12/2026-22:42:22] [I]        5.70       0.0100       0.0099       0.2   /model/encoder/layer.6/attention/self/MatMul_myl0_104
+[11/12/2026-22:42:22] [I]        3.34       0.0058       0.0058       0.1   __myl_MulAddMaxrSubExpSumDivMul_myl0_105
+[11/12/2026-22:42:22] [I]       26.04       0.0455       0.0455       0.8   /model/encoder/layer.6/attention/self/MatMul_1_myl0_106
+[11/12/2026-22:42:22] [I]        3.15       0.0055       0.0052       0.1   __myl_Tran_myl0_107
+[11/12/2026-22:42:22] [I]       14.52       0.0254       0.0253       0.4   /model/encoder/layer.6/attention/output/dense/MatMul_myl0_108
+[11/12/2026-22:42:22] [I]        5.02       0.0088       0.0087       0.2   __myl_AddMeanSubMulMeanAddSqrtDivMulMulAdd_myl0_109
+[11/12/2026-22:42:22] [I]       12.93       0.0226       0.0225       0.4   /model/encoder/layer.6/intermediate/dense/MatMul_myl0_110
+[11/12/2026-22:42:22] [I]        4.53       0.0079       0.0078       0.1   __myl_DivErfAddMulMul_myl0_111
+[11/12/2026-22:42:22] [I]       40.72       0.0712       0.0711       1.2   /model/encoder/layer.6/output/dense/MatMul_myl0_112
+[11/12/2026-22:42:22] [I]       39.61       0.0693       0.0692       1.2   __myl_AddMeanSubMulMean_myl0_113
+[11/12/2026-22:42:22] [I]        4.62       0.0081       0.0080       0.1   __myl_AddSqrtDivMulMulAddReshTran_myl0_114
+[11/12/2026-22:42:22] [I]       14.18       0.0248       0.0247       0.4   __mye57527+__mye57515+__mye57503_myl0_115
+[11/12/2026-22:42:22] [I]       24.56       0.0429       0.0429       0.7   __mye82969_myl0_116
+[11/12/2026-22:42:22] [I]        1.17       0.0021       0.0020       0.0   cast_hvar^82965i64_myl0_117
+[11/12/2026-22:42:22] [I]        1.54       0.0027       0.0026       0.0   __mye82988_myl0_118
+[11/12/2026-22:42:22] [I]        1.91       0.0033       0.0033       0.1   cast_hvar^82984i64_myl0_119
+[11/12/2026-22:42:22] [I]        5.85       0.0102       0.0101       0.2   /model/encoder/layer.7/attention/self/MatMul_myl0_120
+[11/12/2026-22:42:22] [I]        3.97       0.0069       0.0068       0.1   __myl_MulAddMaxrSubExpSumDivMul_myl0_121
+[11/12/2026-22:42:22] [I]       19.00       0.0332       0.0332       0.6   /model/encoder/layer.7/attention/self/MatMul_1_myl0_122
+[11/12/2026-22:42:22] [I]       20.13       0.0352       0.0351       0.6   __myl_Tran_myl0_123
+[11/12/2026-22:42:22] [I]       14.73       0.0257       0.0256       0.4   /model/encoder/layer.7/attention/output/dense/MatMul_myl0_124
+[11/12/2026-22:42:22] [I]        4.99       0.0087       0.0087       0.2   __myl_AddMeanSubMulMeanAddSqrtDivMulMulAdd_myl0_125
+[11/12/2026-22:42:22] [I]       30.50       0.0533       0.0532       0.9   /model/encoder/layer.7/intermediate/dense/MatMul_myl0_126
+[11/12/2026-22:42:22] [I]       26.93       0.0471       0.0468       0.8   __myl_DivErfAddMulMul_myl0_127
+[11/12/2026-22:42:22] [I]       18.45       0.0323       0.0323       0.6   /model/encoder/layer.7/output/dense/MatMul_myl0_128
+[11/12/2026-22:42:22] [I]       18.75       0.0328       0.0328       0.6   __myl_AddMeanSubMulMean_myl0_129
+[11/12/2026-22:42:22] [I]        4.09       0.0071       0.0070       0.1   __myl_AddSqrtDivMulMulAddReshTran_myl0_130
+[11/12/2026-22:42:22] [I]       34.32       0.0600       0.0600       1.0   __mye57621+__mye57609+__mye57597_myl0_131
+[11/12/2026-22:42:22] [I]        1.19       0.0021       0.0021       0.0   __mye82931_myl0_132
+[11/12/2026-22:42:22] [I]        1.14       0.0020       0.0019       0.0   cast_hvar^82927i64_myl0_133
+[11/12/2026-22:42:22] [I]        1.88       0.0033       0.0033       0.1   __mye82950_myl0_134
+[11/12/2026-22:42:22] [I]        1.12       0.0020       0.0020       0.0   cast_hvar^82946i64_myl0_135
+[11/12/2026-22:42:22] [I]        4.65       0.0081       0.0081       0.1   /model/encoder/layer.8/attention/self/MatMul_myl0_136
+[11/12/2026-22:42:22] [I]       39.29       0.0687       0.0688       1.2   __myl_MulAddMaxrSubExpSumDivMul_myl0_137
+[11/12/2026-22:42:22] [I]        5.01       0.0088       0.0088       0.2   /model/encoder/layer.8/attention/self/MatMul_1_myl0_138
+[11/12/2026-22:42:22] [I]       49.71       0.0869       0.0870       1.5   __myl_Tran_myl0_139
+[11/12/2026-22:42:22] [I]       49.87       0.0872       0.0873       1.5   /model/encoder/layer.8/attention/output/dense/MatMul_myl0_140
+[11/12/2026-22:42:22] [I]        6.53       0.0114       0.0114       0.2   __myl_AddMeanSubMulMeanAddSqrtDivMulMulAdd_myl0_141
+[11/12/2026-22:42:22] [I]       13.27       0.0232       0.0231       0.4   /model/encoder/layer.8/intermediate/dense/MatMul_myl0_142
+[11/12/2026-22:42:22] [I]       29.92       0.0523       0.0523       0.9   __myl_DivErfAddMulMul_myl0_143
+[11/12/2026-22:42:22] [I]       18.95       0.0331       0.0331       0.6   /model/encoder/layer.8/output/dense/MatMul_myl0_144
+[11/12/2026-22:42:22] [I]       22.75       0.0398       0.0398       0.7   __myl_AddMeanSubMulMean_myl0_145
+[11/12/2026-22:42:22] [I]        3.47       0.0061       0.0060       0.1   __myl_AddSqrtDivMulMulAddReshTran_myl0_146
+[11/12/2026-22:42:22] [I]       15.22       0.0266       0.0266       0.5   __mye57715+__mye57703+__mye57691_myl0_147
+[11/12/2026-22:42:22] [I]       22.28       0.0389       0.0390       0.7   __mye82893_myl0_148
+[11/12/2026-22:42:22] [I]        1.19       0.0021       0.0021       0.0   cast_hvar^82889i64_myl0_149
+[11/12/2026-22:42:22] [I]        1.42       0.0025       0.0024       0.0   __mye82912_myl0_150
+[11/12/2026-22:42:22] [I]        1.57       0.0028       0.0028       0.0   cast_hvar^82908i64_myl0_151
+[11/12/2026-22:42:22] [I]       20.60       0.0360       0.0360       0.6   /model/encoder/layer.9/attention/self/MatMul_myl0_152
+[11/12/2026-22:42:22] [I]        4.81       0.0084       0.0084       0.1   __myl_MulAddMaxrSubExpSumDivMul_myl0_153
+[11/12/2026-22:42:22] [I]        5.91       0.0103       0.0103       0.2   /model/encoder/layer.9/attention/self/MatMul_1_myl0_154
+[11/12/2026-22:42:22] [I]       20.87       0.0365       0.0365       0.6   __myl_Tran_myl0_155
+[11/12/2026-22:42:22] [I]       14.04       0.0245       0.0245       0.4   /model/encoder/layer.9/attention/output/dense/MatMul_myl0_156
+[11/12/2026-22:42:22] [I]       25.81       0.0451       0.0452       0.8   __myl_AddMeanSubMulMeanAddSqrtDivMulMulAdd_myl0_157
+[11/12/2026-22:42:22] [I]       32.76       0.0573       0.0572       1.0   /model/encoder/layer.9/intermediate/dense/MatMul_myl0_158
+[11/12/2026-22:42:22] [I]        3.28       0.0057       0.0057       0.1   __myl_DivErfAddMulMul_myl0_159
+[11/12/2026-22:42:22] [I]       34.77       0.0608       0.0604       1.1   /model/encoder/layer.9/output/dense/MatMul_myl0_160
+[11/12/2026-22:42:22] [I]        3.93       0.0069       0.0069       0.1   __myl_AddMeanSubMulMean_myl0_161
+[11/12/2026-22:42:22] [I]        4.43       0.0077       0.0077       0.1   __myl_AddSqrtDivMulMulAddReshTran_myl0_162
+[11/12/2026-22:42:22] [I]       14.70       0.0257       0.0257       0.4   __mye57809+__mye57797+__mye57785_myl0_163
+[11/12/2026-22:42:22] [I]       27.81       0.0486       0.0486       0.8   __mye82855_myl0_164
+[11/12/2026-22:42:22] [I]        1.61       0.0028       0.0028       0.0   cast_hvar^82851i64_myl0_165
+[11/12/2026-22:42:22] [I]       23.83       0.0417       0.0417       0.7   __mye82874_myl0_166
+[11/12/2026-22:42:22] [I]       84.05       0.1469       0.1472       2.5   cast_hvar^82870i64_myl0_167
+[11/12/2026-22:42:22] [I]        6.03       0.0105       0.0105       0.2   /model/encoder/layer.10/attention/self/MatMul_myl0_168
+[11/12/2026-22:42:22] [I]        3.95       0.0069       0.0069       0.1   __myl_MulAddMaxrSubExpSumDivMul_myl0_169
+[11/12/2026-22:42:22] [I]       30.91       0.0540       0.0541       0.9   /model/encoder/layer.10/attention/self/MatMul_1_myl0_170
+[11/12/2026-22:42:22] [I]        2.78       0.0049       0.0049       0.1   __myl_Tran_myl0_171
+[11/12/2026-22:42:22] [I]       13.93       0.0244       0.0244       0.4   /model/encoder/layer.10/attention/output/dense/MatMul_myl0_172
+[11/12/2026-22:42:22] [I]        5.76       0.0101       0.0100       0.2   __myl_AddMeanSubMulMeanAddSqrtDivMulMulAdd_myl0_173
+[11/12/2026-22:42:22] [I]       34.96       0.0611       0.0611       1.1   /model/encoder/layer.10/intermediate/dense/MatMul_myl0_174
+[11/12/2026-22:42:22] [I]        5.43       0.0095       0.0095       0.2   __myl_DivErfAddMulMul_myl0_175
+[11/12/2026-22:42:22] [I]       62.10       0.1086       0.1086       1.9   /model/encoder/layer.10/output/dense/MatMul_myl0_176
+[11/12/2026-22:42:22] [I]       25.20       0.0441       0.0441       0.8   __myl_AddMeanSubMulMean_myl0_177
+[11/12/2026-22:42:22] [I]      122.67       0.2145       0.2148       3.7   __myl_AddSqrtDivMulMulAddReshTran_myl0_178
+[11/12/2026-22:42:22] [I]       14.85       0.0260       0.0259       0.4   __mye57903+__mye57891+__mye57879_myl0_179
+[11/12/2026-22:42:22] [I]        1.18       0.0021       0.0020       0.0   __mye82801_myl0_180
+[11/12/2026-22:42:22] [I]        1.53       0.0027       0.0026       0.0   cast_hvar^82797i64_myl0_181
+[11/12/2026-22:42:22] [I]       34.26       0.0599       0.0599       1.0   __mye82836_myl0_182
+[11/12/2026-22:42:22] [I]        2.64       0.0046       0.0045       0.1   cast_hvar^82832i64_myl0_183
+[11/12/2026-22:42:22] [I]       24.19       0.0423       0.0423       0.7   /model/encoder/layer.11/attention/self/MatMul_myl0_184
+[11/12/2026-22:42:22] [I]        3.14       0.0055       0.0054       0.1   __myl_MulAddMaxrSubExpSumDivMul_myl0_185
+[11/12/2026-22:42:22] [I]       39.24       0.0686       0.0686       1.2   /model/encoder/layer.11/attention/self/MatMul_1_myl0_186
+[11/12/2026-22:42:22] [I]        3.69       0.0064       0.0063       0.1   __myl_Tran_myl0_187
+[11/12/2026-22:42:22] [I]       41.02       0.0717       0.0717       1.2   /model/encoder/layer.11/attention/output/dense/MatMul_myl0_188
+[11/12/2026-22:42:22] [I]       56.64       0.0990       0.0991       1.7   __myl_AddMeanSubMulMeanAddSqrtDivMulMulAdd_myl0_189
+[11/12/2026-22:42:22] [I]       34.53       0.0604       0.0603       1.0   /model/encoder/layer.11/intermediate/dense/MatMul_myl0_190
+[11/12/2026-22:42:22] [I]       25.44       0.0445       0.0444       0.8   __myl_DivErfAddMulMul_myl0_191
+[11/12/2026-22:42:22] [I]       41.43       0.0724       0.0725       1.3   /model/encoder/layer.11/output/dense/MatMul_myl0_192
+[11/12/2026-22:42:22] [I]       15.44       0.0270       0.0270       0.5   __myl_AddMeanSubMulMean_myl0_193
+[11/12/2026-22:42:22] [I]       24.36       0.0426       0.0426       0.7   __myl_AddSqrtDivMulMulAddReshSlic_myl0_194
+[11/12/2026-22:42:22] [I]       24.82       0.0434       0.0434       0.8   /model/pooler/dense/Gemm_myl0_195
+[11/12/2026-22:42:22] [I]       37.61       0.0658       0.0659       1.1   __myl_Tanh_myl0_196
+[11/12/2026-22:42:22] [I]     3306.30       5.7802       5.7760     100.0   Total
+[11/12/2026-22:42:22] [I] 
+&&&& PASSED TensorRT.trtexec [TensorRT v110400] [b106] # /usr/bin/trtexec --loadEngine=models/bert_opt_fp32.plan --shapes=input_ids:1x128,attention_mask:1x128 --warmUp=50 --iterations=200 --profilingVerbosity=detailed --dumpProfile
+Collecting data...
+Generating '/tmp/nsys-samruddhi/nsys-report-7246.qdstrm'
+[1/8] [0%                          ] nsys_optimized_b1.nsys-rep[1/8] [0%                          ] nsys_optimized_b1.nsys-rep[1/8] [1%                          ] nsys_optimized_b1.nsys-rep[1/8] [2%                          ] nsys_optimized_b1.nsys-rep[1/8] [5%                          ] nsys_optimized_b1.nsys-rep[1/8] [6%                          ] nsys_optimized_b1.nsys-rep[1/8] [7%                          ] nsys_optimized_b1.nsys-rep[1/8] [8%                          ] nsys_optimized_b1.nsys-rep[1/8] [9%                          ] nsys_optimized_b1.nsys-rep[1/8] [10%                         ] nsys_optimized_b1.nsys-rep[1/8] [11%                         ] nsys_optimized_b1.nsys-rep[1/8] [12%                         ] nsys_optimized_b1.nsys-rep[1/8] [13%                         ] nsys_optimized_b1.nsys-rep[1/8] [14%                         ] nsys_optimized_b1.nsys-rep[1/8] [=15%                        ] nsys_optimized_b1.nsys-rep[1/8] [=16%                        ] nsys_optimized_b1.nsys-rep[1/8] [=17%                        ] nsys_optimized_b1.nsys-rep[1/8] [==18%                       ] nsys_optimized_b1.nsys-rep[1/8] [==19%                       ] nsys_optimized_b1.nsys-rep[1/8] [==20%                       ] nsys_optimized_b1.nsys-rep[1/8] [===24%                      ] nsys_optimized_b1.nsys-rep[1/8] [=======================93%  ] nsys_optimized_b1.nsys-rep[1/8] [=======================96%  ] nsys_optimized_b1.nsys-rep[1/8] [========================98% ] nsys_optimized_b1.nsys-rep[1/8] [========================100%] nsys_optimized_b1.nsys-rep[1/8] [========================100%] nsys_optimized_b1.nsys-rep
+[2/8] [0%                          ] nsys_optimized_b1.sqlite[2/8] [1%                          ] nsys_optimized_b1.sqlite[2/8] [2%                          ] nsys_optimized_b1.sqlite[2/8] [3%                          ] nsys_optimized_b1.sqlite[2/8] [4%                          ] nsys_optimized_b1.sqlite[2/8] [5%                          ] nsys_optimized_b1.sqlite[2/8] [6%                          ] nsys_optimized_b1.sqlite[2/8] [7%                          ] nsys_optimized_b1.sqlite[2/8] [8%                          ] nsys_optimized_b1.sqlite[2/8] [9%                          ] nsys_optimized_b1.sqlite[2/8] [10%                         ] nsys_optimized_b1.sqlite[2/8] [11%                         ] nsys_optimized_b1.sqlite[2/8] [12%                         ] nsys_optimized_b1.sqlite[2/8] [13%                         ] nsys_optimized_b1.sqlite[2/8] [14%                         ] nsys_optimized_b1.sqlite[2/8] [=15%                        ] nsys_optimized_b1.sqlite[2/8] [=16%                        ] nsys_optimized_b1.sqlite[2/8] [=17%                        ] nsys_optimized_b1.sqlite[2/8] [==18%                       ] nsys_optimized_b1.sqlite[2/8] [==19%                       ] nsys_optimized_b1.sqlite[2/8] [==20%                       ] nsys_optimized_b1.sqlite[2/8] [==21%                       ] nsys_optimized_b1.sqlite[2/8] [===22%                      ] nsys_optimized_b1.sqlite[2/8] [===23%                      ] nsys_optimized_b1.sqlite[2/8] [===24%                      ] nsys_optimized_b1.sqlite[2/8] [====25%                     ] nsys_optimized_b1.sqlite[2/8] [====26%                     ] nsys_optimized_b1.sqlite[2/8] [====27%                     ] nsys_optimized_b1.sqlite[2/8] [====28%                     ] nsys_optimized_b1.sqlite[2/8] [=====29%                    ] nsys_optimized_b1.sqlite[2/8] [=====30%                    ] nsys_optimized_b1.sqlite[2/8] [=====31%                    ] nsys_optimized_b1.sqlite[2/8] [=====32%                    ] nsys_optimized_b1.sqlite[2/8] [======33%                   ] nsys_optimized_b1.sqlite[2/8] [======34%                   ] nsys_optimized_b1.sqlite[2/8] [======35%                   ] nsys_optimized_b1.sqlite[2/8] [=======36%                  ] nsys_optimized_b1.sqlite[2/8] [=======37%                  ] nsys_optimized_b1.sqlite[2/8] [=======38%                  ] nsys_optimized_b1.sqlite[2/8] [=======39%                  ] nsys_optimized_b1.sqlite[2/8] [========40%                 ] nsys_optimized_b1.sqlite[2/8] [========41%                 ] nsys_optimized_b1.sqlite[2/8] [========42%                 ] nsys_optimized_b1.sqlite[2/8] [=========43%                ] nsys_optimized_b1.sqlite[2/8] [=========44%                ] nsys_optimized_b1.sqlite[2/8] [=========45%                ] nsys_optimized_b1.sqlite[2/8] [=========46%                ] nsys_optimized_b1.sqlite[2/8] [==========47%               ] nsys_optimized_b1.sqlite[2/8] [==========48%               ] nsys_optimized_b1.sqlite[2/8] [==========49%               ] nsys_optimized_b1.sqlite[2/8] [===========50%              ] nsys_optimized_b1.sqlite[2/8] [===========51%              ] nsys_optimized_b1.sqlite[2/8] [===========52%              ] nsys_optimized_b1.sqlite[2/8] [===========53%              ] nsys_optimized_b1.sqlite[2/8] [============54%             ] nsys_optimized_b1.sqlite[2/8] [============55%             ] nsys_optimized_b1.sqlite[2/8] [============56%             ] nsys_optimized_b1.sqlite[2/8] [============57%             ] nsys_optimized_b1.sqlite[2/8] [=============58%            ] nsys_optimized_b1.sqlite[2/8] [=============59%            ] nsys_optimized_b1.sqlite[2/8] [=============60%            ] nsys_optimized_b1.sqlite[2/8] [==============61%           ] nsys_optimized_b1.sqlite[2/8] [==============62%           ] nsys_optimized_b1.sqlite[2/8] [==============63%           ] nsys_optimized_b1.sqlite[2/8] [==============64%           ] nsys_optimized_b1.sqlite[2/8] [===============65%          ] nsys_optimized_b1.sqlite[2/8] [===============66%          ] nsys_optimized_b1.sqlite[2/8] [===============67%          ] nsys_optimized_b1.sqlite[2/8] [================68%         ] nsys_optimized_b1.sqlite[2/8] [================69%         ] nsys_optimized_b1.sqlite[2/8] [================70%         ] nsys_optimized_b1.sqlite[2/8] [================71%         ] nsys_optimized_b1.sqlite[2/8] [=================72%        ] nsys_optimized_b1.sqlite[2/8] [=================73%        ] nsys_optimized_b1.sqlite[2/8] [=================74%        ] nsys_optimized_b1.sqlite[2/8] [==================75%       ] nsys_optimized_b1.sqlite[2/8] [==================76%       ] nsys_optimized_b1.sqlite[2/8] [==================77%       ] nsys_optimized_b1.sqlite[2/8] [==================78%       ] nsys_optimized_b1.sqlite[2/8] [===================79%      ] nsys_optimized_b1.sqlite[2/8] [===================80%      ] nsys_optimized_b1.sqlite[2/8] [===================81%      ] nsys_optimized_b1.sqlite[2/8] [===================82%      ] nsys_optimized_b1.sqlite[2/8] [====================83%     ] nsys_optimized_b1.sqlite[2/8] [====================84%     ] nsys_optimized_b1.sqlite[2/8] [====================85%     ] nsys_optimized_b1.sqlite[2/8] [=====================86%    ] nsys_optimized_b1.sqlite[2/8] [=====================87%    ] nsys_optimized_b1.sqlite[2/8] [=====================88%    ] nsys_optimized_b1.sqlite[2/8] [=====================89%    ] nsys_optimized_b1.sqlite[2/8] [======================90%   ] nsys_optimized_b1.sqlite[2/8] [======================91%   ] nsys_optimized_b1.sqlite[2/8] [======================92%   ] nsys_optimized_b1.sqlite[2/8] [=======================93%  ] nsys_optimized_b1.sqlite[2/8] [=======================94%  ] nsys_optimized_b1.sqlite[2/8] [=======================95%  ] nsys_optimized_b1.sqlite[2/8] [=======================96%  ] nsys_optimized_b1.sqlite[2/8] [========================97% ] nsys_optimized_b1.sqlite[2/8] [========================98% ] nsys_optimized_b1.sqlite[2/8] [========================99% ] nsys_optimized_b1.sqlite[2/8] [========================100%] nsys_optimized_b1.sqlite[2/8] [========================100%] nsys_optimized_b1.sqlite
+[3/8] Executing 'nvtx_sum' stats report
+
+ Time (%)  Total Time (ns)  Instances   Avg (ns)    Med (ns)   Min (ns)  Max (ns)  StdDev (ns)   Style                                              Range                                          
+ --------  ---------------  ---------  ----------  ----------  --------  --------  -----------  --------  -----------------------------------------------------------------------------------------
+     19.8         24769435          4   6192358.8   5771689.5    605880  12620176    6322001.8  PushPop   TensorRT:ExecutionContext::enqueueV3                                                     
+     15.8         19764567          4   4941141.8   3302244.0    595247  12564832    5590185.3  PushPop   TensorRT:{ForeignNode[/model/Cast.../model/pooler/activation/Tanh]}                      
+     15.6         19474637          4   4868659.3   3274275.5    456746  12469340    5584456.3  StartEnd  myelin-exec:myelinGraphExecute                                                           
+     14.1         17648799          1  17648799.0  17648799.0  17648799  17648799          0.0  StartEnd  myelin-exec:myelinGraphUnloadPersistent                                                  
+      9.7         12118707          1  12118707.0  12118707.0  12118707  12118707          0.0  StartEnd  myelin-exec:myelinGraphLoadPersistent                                                    
+      9.4         11774754          1  11774754.0  11774754.0  11774754  11774754          0.0  StartEnd  :myelinGraphDeserializeBinary                                                            
+      0.5           681070          4    170267.5     91887.5      4639    492656     220296.2  PushPop   myelin-exec:__myl_CastGathCastReplGathGathReshReshAddReshGathAddReshMeanSubMulMean_myl0_1
+      0.5           610273          4    152568.3     22734.5       509    564295     275226.3  PushPop   myelin-exec:cast_hvar^83231i64_myl0_5                                                    
+      0.5           591660          4    147915.0      9152.0       714    572642     283245.8  PushPop   myelin-exec:__mye83235_myl0_4                                                            
+      0.4           489821          4    122455.3     49690.0      4157    386284     180907.9  PushPop   myelin-exec:__mye56869+__mye56857+__mye56845_myl0_3                                      
+      0.2           295076          4     73769.0     29053.5      3150    233819     107847.9  PushPop   myelin-exec:/model/encoder/layer.5/output/dense/MatMul_myl0_96                           
+      0.2           261544          4     65386.0     18276.5      1695    223296     106397.7  PushPop   myelin-exec:__myl_AddSqrtDivMulMulAddReshTran_myl0_130                                   
+      0.2           224597          4     56149.3     21054.5      2523    179965      84307.0  PushPop   myelin-exec:/model/encoder/layer.6/attention/self/MatMul_myl0_104                        
+      0.2           218472          4     54618.0     21091.5       796    175493      82692.3  PushPop   myelin-exec:__myl_Tran_myl0_107                                                          
+      0.2           207082          4     51770.5     27524.5      2688    149345      68978.1  PushPop   myelin-exec:/model/encoder/layer.6/intermediate/dense/MatMul_myl0_110                    
+      0.1           183702          4     45925.5       961.0       288    181492      90378.8  PushPop   myelin-exec:cast_hvar^82908i64_myl0_151                                                  
+      0.1           175094          4     43773.5     22734.0      2989    126637      58269.2  PushPop   myelin-exec:/model/encoder/layer.6/output/dense/MatMul_myl0_112                          
+      0.1           173352          4     43338.0     42682.0      2358     85630      47203.0  PushPop   myelin-exec:/model/encoder/layer.11/attention/output/dense/MatMul_myl0_188               
+      0.1           166138          4     41534.5     31714.5      3243     99466      46298.5  PushPop   myelin-exec:/model/encoder/layer.3/intermediate/dense/MatMul_myl0_62                     
+      0.1           165188          4     41297.0     29157.0      4031    102843      47086.6  PushPop   myelin-exec:/model/encoder/layer.1/intermediate/dense/MatMul_myl0_30                     
+      0.1           160893          4     40223.3      3592.5       670    153038      75240.3  PushPop   myelin-exec:__myl_MulAddMaxrSubExpSumDivMul_myl0_169                                     
+      0.1           158775          4     39693.8     26951.0      2726    102147      47457.3  PushPop   myelin-exec:/model/encoder/layer.7/intermediate/dense/MatMul_myl0_126                    
+      0.1           157807          4     39451.8     20507.0      2568    114225      52631.3  PushPop   myelin-exec:/model/encoder/layer.7/attention/self/MatMul_myl0_120                        
+      0.1           156428          4     39107.0     35255.0      2097     83821      42409.7  PushPop   myelin-exec:/model/encoder/layer.10/attention/output/dense/MatMul_myl0_172               
+      0.1           155840          4     38960.0     25170.5      2117    103382      46093.3  StartEnd  myelin-exec:myelinGraphLoad                                                              
+      0.1           149703          4     37425.8     13513.5      2684    119992      55923.6  PushPop   myelin-exec:/model/encoder/layer.9/intermediate/dense/MatMul_myl0_158                    
+      0.1           149308          4     37327.0      8984.0      2514    128826      61235.5  PushPop   myelin-exec:/model/encoder/layer.4/output/dense/MatMul_myl0_80                           
+      0.1           148419          4     37104.8     36204.5      1736     74274      40511.5  PushPop   myelin-exec:/model/encoder/layer.9/attention/self/MatMul_myl0_152                        
+      0.1           148125          4     37031.3     23914.0      2977     97320      44634.0  PushPop   myelin-exec:/model/encoder/layer.4/intermediate/dense/MatMul_myl0_78                     
+      0.1           145246          4     36311.5     23662.5      3312     94609      42942.5  PushPop   myelin-exec:/model/encoder/layer.3/output/dense/MatMul_myl0_64                           
+      0.1           140592          4     35148.0     24057.0      2767     89711      41266.3  PushPop   myelin-exec:/model/encoder/layer.7/output/dense/MatMul_myl0_128                          
+      0.1           139067          4     34766.8     21865.0      1544     93793      43456.6  PushPop   myelin-exec:__mye57339+__mye57327+__mye57315_myl0_83                                     
+      0.1           138001          4     34500.3     25515.0      1705     85266      36553.7  PushPop   myelin-exec:__myl_DivErfAddMulMul_myl0_63                                                
+      0.1           137729          4     34432.3     22681.0      2524     89843      41531.0  PushPop   myelin-exec:/model/encoder/layer.4/attention/self/MatMul_1_myl0_74                       
+      0.1           137055          4     34263.8     16843.0      1627    101742      47089.2  PushPop   myelin-exec:__myl_AddSqrtDivMulMulAddReshTran_myl0_178                                   
+      0.1           130948          4     32737.0     17921.5      3020     92085      40390.2  PushPop   myelin-exec:/model/encoder/layer.1/attention/output/dense/MatMul_myl0_28                 
+      0.1           130892          4     32723.0     26517.5      3411     74446      35090.3  PushPop   myelin-exec:/model/encoder/layer.0/attention/output/dense/MatMul_myl0_12                 
+      0.1           129720          4     32430.0     22234.5      3000     82251      37829.6  PushPop   myelin-exec:/model/encoder/layer.4/attention/output/dense/MatMul_myl0_76                 
+      0.1           128249          4     32062.3     30797.5      2535     64119      28306.9  PushPop   myelin-exec:/model/encoder/layer.8/attention/self/MatMul_myl0_136                        
+      0.1           126336          4     31584.0     31361.0      4563     59051      29670.9  PushPop   myelin-exec:/model/encoder/layer.0/intermediate/dense/MatMul_myl0_14                     
+      0.1           126011          4     31502.8     18885.0       780     87461      40714.4  PushPop   myelin-exec:__myl_AddMeanSubMulMeanAddSqrtDivMulMulAdd_myl0_77                           
+      0.1           125784          4     31446.0      7831.0      1460    108662      51690.2  PushPop   myelin-exec:__mye57057+__mye57045+__mye57033_myl0_35                                     
+      0.1           125049          4     31262.3      6062.0      2454    110471      52904.4  PushPop   myelin-exec:/model/encoder/layer.7/attention/self/MatMul_1_myl0_122                      
+      0.1           124712          4     31178.0      5758.5      2363    110832      53174.6  PushPop   myelin-exec:/model/encoder/layer.2/attention/self/MatMul_myl0_40                         
+      0.1           123757          4     30939.3      5273.5      2394    110816      53311.7  PushPop   myelin-exec:/model/encoder/layer.10/attention/self/MatMul_myl0_168                       
+      0.1           123436          4     30859.0      4683.5      1695    112374      54412.2  PushPop   myelin-exec:__myl_AddSqrtDivMulMulAddReshTran_myl0_82                                    
+      0.1           123413          4     30853.3     10060.5      2604    100688      46986.6  PushPop   myelin-exec:/model/encoder/layer.10/intermediate/dense/MatMul_myl0_174                   
+      0.1           123078          4     30769.5     17907.5      1790     85473      39502.8  PushPop   myelin-exec:__myl_DivErfAddMulMul_myl0_111                                               
+      0.1           122635          4     30658.8     16514.5       808     88798      41270.3  PushPop   myelin-exec:__myl_AddMeanSubMulMeanAddSqrtDivMulMulAdd_myl0_109                          
+      0.1           122406          4     30601.5      5367.5      2397    109274      52512.7  PushPop   myelin-exec:/model/encoder/layer.11/attention/self/MatMul_myl0_184                       
+      0.1           122149          4     30537.3      9048.0      2813    101240      47496.1  PushPop   myelin-exec:/model/encoder/layer.10/output/dense/MatMul_myl0_176                         
+      0.1           122128          4     30532.0     26380.5      2256     67111      32918.4  PushPop   myelin-exec:/model/encoder/layer.1/attention/self/MatMul_myl0_24                         
+      0.1           121415          4     30353.8     16646.0      1654     86469      39951.5  PushPop   myelin-exec:__myl_AddSqrtDivMulMulAddReshTran_myl0_114                                   
+      0.1           120503          4     30125.8     16337.0       612     87217      40487.7  PushPop   myelin-exec:__myl_AddMeanSubMulMean_myl0_81                                              
+      0.1           120349          4     30087.3     19360.0       683     80946      37786.3  PushPop   myelin-exec:__myl_AddMeanSubMulMean_myl0_17                                              
+      0.1           119717          4     29929.3      4387.5      1883    109059      52804.3  PushPop   myelin-exec:__myl_DivErfAddMulMul_myl0_79                                                
+      0.1           119655          4     29913.8     23236.5      2357     70825      33283.4  PushPop   myelin-exec:/model/encoder/layer.3/attention/self/MatMul_myl0_56                         
+      0.1           119295          4     29823.8     19167.0       549     80412      37618.1  PushPop   myelin-exec:__myl_Tran_myl0_59                                                           
+      0.1           119285          4     29821.3     18911.0       601     80862      37862.1  PushPop   myelin-exec:__myl_Tran_myl0_123                                                          
+      0.1           119206          4     29801.5     21395.0      2900     73516      33875.0  PushPop   myelin-exec:/model/encoder/layer.2/attention/output/dense/MatMul_myl0_44                 
+      0.1           118812          4     29703.0      9196.5      2455     97964      45912.5  PushPop   myelin-exec:/model/encoder/layer.11/intermediate/dense/MatMul_myl0_190                   
+      0.1           117809          4     29452.3      5224.0      1674    105687      50932.9  PushPop   myelin-exec:__myl_DivErfAddMulMul_myl0_191                                               
+      0.1           117783          4     29445.8     26246.0      2471     62820      31296.6  PushPop   myelin-exec:/model/encoder/layer.5/attention/self/MatMul_1_myl0_90                       
+      0.1           117612          4     29403.0     18041.0      1817     79713      36849.8  PushPop   myelin-exec:__myl_DivErfAddMulMul_myl0_159                                               
+      0.1           117217          4     29304.3     24997.0      3223     64000      30900.2  PushPop   myelin-exec:/model/encoder/layer.0/attention/self/MatMul_1_myl0_10                       
+      0.1           116355          4     29088.8     16505.0       650     82695      38384.3  PushPop   myelin-exec:__myl_AddMeanSubMulMeanAddSqrtDivMulMulAdd_myl0_61                           
+      0.1           116014          4     29003.5      6068.0      2665    101213      48245.2  PushPop   myelin-exec:/model/encoder/layer.6/attention/self/MatMul_1_myl0_106                      
+      0.1           111794          4     27948.5     13792.0      2488     81722      37284.8  PushPop   myelin-exec:/model/encoder/layer.2/intermediate/dense/MatMul_myl0_46                     
+      0.1           109277          4     27319.3     25823.0      2561     55070      28097.7  PushPop   myelin-exec:/model/encoder/layer.8/intermediate/dense/MatMul_myl0_142                    
+      0.1           108219          4     27054.8     18579.5      1590     69470      32306.6  PushPop   myelin-exec:__myl_DivErfAddMulMul_myl0_95                                                
+      0.1           105341          4     26335.3     22067.0      1660     59547      29309.0  PushPop   myelin-exec:__myl_DivErfAddMulMul_myl0_175                                               
+      0.1           105096          4     26274.0      3727.0       717     96925      47152.6  PushPop   myelin-exec:__myl_MulAddMaxrSubExpSumDivMul_myl0_121                                     
+      0.1           105022          4     26255.5      6090.5      2228     90613      43026.3  PushPop   myelin-exec:/model/encoder/layer.3/attention/self/MatMul_1_myl0_58                       
+      0.1           104592          4     26148.0     14249.5      2585     73508      33191.9  PushPop   myelin-exec:/model/encoder/layer.5/intermediate/dense/MatMul_myl0_94                     
+      0.1           104055          4     26013.8     23042.5       621     57349      29149.3  PushPop   myelin-exec:__myl_AddMeanSubMulMeanAddSqrtDivMulMulAdd_myl0_93                           
+      0.1           103357          4     25839.3      7264.5      2540     86288      40534.6  PushPop   myelin-exec:/model/encoder/layer.7/attention/output/dense/MatMul_myl0_124                
+      0.1           101779          4     25444.8      9358.0      1458     81605      37783.6  PushPop   myelin-exec:/model/pooler/dense/Gemm_myl0_195                                            
+      0.1           100292          4     25073.0     19854.0      1968     58616      27651.2  PushPop   myelin-exec:/model/encoder/layer.1/attention/self/MatMul_1_myl0_26                       
+      0.1            99179          4     24794.8     13446.5       176     72110      33674.2  PushPop   myelin-exec:cast_hvar^82984i64_myl0_119                                                  
+      0.1            99089          4     24772.3      3821.5       992     90454      43846.0  PushPop   myelin-exec:__myl_MulAddMaxrSubExpSumDivMul_myl0_105                                     
+      0.1            98857          4     24714.3     16232.5       972     65420      30482.2  PushPop   myelin-exec:__myl_AddMeanSubMulMeanAddSqrtDivMulMulAdd_myl0_141                          
+      0.1            98422          4     24605.5      5122.0       546     87632      42159.6  PushPop   myelin-exec:__myl_AddMeanSubMulMeanAddSqrtDivMulMulAdd_myl0_189                          
+      0.1            98003          4     24500.8     22896.5      2780     49430      25191.9  PushPop   myelin-exec:/model/encoder/layer.2/output/dense/MatMul_myl0_48                           
+      0.1            97580          4     24395.0      4767.5      2230     85815      41009.1  PushPop   myelin-exec:/model/encoder/layer.11/attention/self/MatMul_1_myl0_186                     
+      0.1            95014          4     23753.5     22816.5      2497     46884      24412.7  PushPop   myelin-exec:/model/encoder/layer.8/output/dense/MatMul_myl0_144                          
+      0.1            94138          4     23534.5     21254.0      2325     49305      24593.3  PushPop   myelin-exec:/model/encoder/layer.2/attention/self/MatMul_1_myl0_42                       
+      0.1            94059          4     23514.8      3502.5       854     86200      41830.6  PushPop   myelin-exec:__myl_MulAddMaxrSubExpSumDivMul_myl0_185                                     
+      0.1            93909          4     23477.3      4352.0       739     84466      40740.6  PushPop   myelin-exec:__myl_Tran_myl0_75                                                           
+      0.1            93486          4     23371.5      4476.5       787     83746      40353.5  PushPop   myelin-exec:__myl_AddMeanSubMulMean_myl0_113                                             
+      0.1            93227          4     23306.8      9403.0      2551     71870      32896.2  PushPop   myelin-exec:/model/encoder/layer.0/output/dense/MatMul_myl0_16                           
+      0.1            93190          4     23297.5     22631.5      1566     46361      23901.1  PushPop   myelin-exec:/model/encoder/layer.0/attention/self/MatMul_myl0_8                          
+      0.1            92721          4     23180.3      7597.0      2225     75302      35047.4  PushPop   myelin-exec:__mye57433+__mye57421+__mye57409_myl0_99                                     
+      0.1            91328          4     22832.0      3171.5       546     84439      41103.5  PushPop   myelin-exec:__myl_Tran_myl0_187                                                          
+      0.1            91183          4     22795.8     20488.0      2623     47584      22664.1  PushPop   myelin-exec:__myl_AddSqrtDivMulMulAddReshSlic_myl0_194                                   
+      0.1            90857          4     22714.3      4786.5      1444     79840      38194.9  PushPop   myelin-exec:__myl_AddMeanSubMulMean_myl0_97                                              
+      0.1            90675          4     22668.8      7449.0      2275     73502      34199.5  PushPop   myelin-exec:/model/encoder/layer.9/attention/output/dense/MatMul_myl0_156                
+      0.1            88763          4     22190.8      7713.5      1273     72063      33615.2  PushPop   myelin-exec:__mye56963+__mye56951+__mye56939_myl0_19                                     
+      0.1            88739          4     22184.8      9320.5      2902     67196      30514.6  PushPop   myelin-exec:/model/encoder/layer.1/output/dense/MatMul_myl0_32                           
+      0.1            88725          4     22181.3     10241.5      1692     66550      30461.6  PushPop   myelin-exec:__myl_Tanh_myl0_196                                                          
+      0.1            88253          4     22063.3     16730.5       719     54073      25779.8  PushPop   myelin-exec:__myl_AddMeanSubMulMeanAddSqrtDivMulMulAdd_myl0_125                          
+      0.1            88069          4     22017.3      5124.5       762     77058      36830.2  PushPop   myelin-exec:__myl_AddMeanSubMulMeanAddSqrtDivMulMulAdd_myl0_13                           
+      0.1            87028          4     21757.0     18035.5      1618     49339      23974.2  PushPop   myelin-exec:__myl_DivErfAddMulMul_myl0_143                                               
+      0.1            86887          4     21721.8     17103.0      1968     50713      23839.9  PushPop   myelin-exec:__myl_AddSqrtDivMulMulAddReshTran_myl0_98                                    
+      0.1            86508          4     21627.0      2934.5      1710     78929      38216.0  PushPop   myelin-exec:__myl_Tran_myl0_171                                                          
+      0.1            85415          4     21353.8     18509.5       854     47542      23658.6  PushPop   myelin-exec:__myl_Tran_myl0_139                                                          
+      0.1            84998          4     21249.5      7302.0      1517     68877      32100.0  PushPop   myelin-exec:__mye57151+__mye57139+__mye57127_myl0_51                                     
+      0.1            84382          4     21095.5     17805.5       650     48121      23645.7  PushPop   myelin-exec:__myl_Tran_myl0_155                                                          
+      0.1            84229          4     21057.3     11331.5       705     60861      28139.6  PushPop   myelin-exec:__myl_AddMeanSubMulMeanAddSqrtDivMulMulAdd_myl0_157                          
+      0.1            83729          4     20932.3     18007.5      1615     46099      22790.7  PushPop   myelin-exec:__myl_DivErfAddMulMul_myl0_47                                                
+      0.1            83441          4     20860.3     18663.0       657     45458      22964.2  PushPop   myelin-exec:__myl_AddMeanSubMulMeanAddSqrtDivMulMulAdd_myl0_45                           
+      0.1            82422          4     20605.5     17361.5      1694     46005      22398.7  PushPop   myelin-exec:__myl_AddSqrtDivMulMulAddReshTran_myl0_50                                    
+      0.1            82249          4     20562.3      7850.0      1450     65099      30093.5  PushPop   myelin-exec:__mye57809+__mye57797+__mye57785_myl0_163                                    
+      0.1            81782          4     20445.5     19649.5      1786     40697      21392.7  PushPop   myelin-exec:__myl_AddSqrtDivMulMulAddReshTran_myl0_18                                    
+      0.1            81578          4     20394.5     18482.5       608     44005      21081.4  PushPop   myelin-exec:__myl_AddMeanSubMulMean_myl0_193                                             
+      0.1            81557          4     20389.3      4535.0       587     71900      34472.9  PushPop   myelin-exec:__myl_AddMeanSubMulMean_myl0_49                                              
+      0.1            81114          4     20278.5      8067.0      2569     62411      28523.3  PushPop   myelin-exec:/model/encoder/layer.3/attention/output/dense/MatMul_myl0_60                 
+      0.1            80757          4     20189.3      7363.0      1710     64321      29809.1  PushPop   myelin-exec:__mye57903+__mye57891+__mye57879_myl0_179                                    
+      0.1            79382          4     19845.5       819.5       387     77356      38341.9  PushPop   myelin-exec:cast_hvar^82797i64_myl0_181                                                  
+      0.1            78430          4     19607.5     15989.5       755     45696      22102.6  PushPop   myelin-exec:__myl_AddSqrtDivMulMulAddReshTran_myl0_146                                   
+      0.1            76849          4     19212.3      7305.5      1477     60761      28111.7  PushPop   myelin-exec:__mye57527+__mye57515+__mye57503_myl0_115                                    
+      0.1            76537          4     19134.3      9190.0      2577     55580      24964.9  PushPop   myelin-exec:/model/encoder/layer.9/output/dense/MatMul_myl0_160                          
+      0.1            75182          4     18795.5      7828.0      2680     56846      25748.7  PushPop   myelin-exec:/model/encoder/layer.6/attention/output/dense/MatMul_myl0_108                
+      0.1            73460          4     18365.0      4691.0       827     63251      30096.7  PushPop   myelin-exec:__myl_AddMeanSubMulMean_myl0_177                                             
+      0.1            73091          4     18272.8      8370.5      2162     54188      24329.0  PushPop   myelin-exec:__myl_AddSqrtDivMulMulAddReshTran_myl0_2                                     
+      0.1            72663          4     18165.8      6452.5      2254     57504      26402.1  PushPop   myelin-exec:/model/encoder/layer.8/attention/self/MatMul_1_myl0_138                      
+      0.1            71260          4     17815.0       625.5       220     69789      34651.3  PushPop   myelin-exec:cast_hvar^82832i64_myl0_183                                                  
+      0.1            70352          4     17588.0       706.5       201     68738      34102.0  PushPop   myelin-exec:cast_hvar^82965i64_myl0_117                                                  
+      0.1            69914          4     17478.5      9692.0      2294     48236      20887.2  PushPop   myelin-exec:__mye57715+__mye57703+__mye57691_myl0_147                                    
+      0.1            69254          4     17313.5      5597.5      2455     55604      25696.2  PushPop   myelin-exec:/model/encoder/layer.5/attention/self/MatMul_myl0_88                         
+      0.1            69132          4     17283.0      6861.0      1821     53589      24568.5  PushPop   myelin-exec:__mye57245+__mye57233+__mye57221_myl0_67                                     
+      0.1            68739          4     17184.8       707.0       220     67105      33282.3  PushPop   myelin-exec:__mye82836_myl0_182                                                          
+      0.1            68491          4     17122.8      8711.5      2500     48568      21653.2  PushPop   myelin-exec:/model/encoder/layer.11/output/dense/MatMul_myl0_192                         
+      0.1            66341          4     16585.3      7536.0      1189     50080      22825.7  PushPop   myelin-exec:__myl_CastReshIotaCastReshReshEqlGtrOrIotaCastReshMulAddCastGathReshAndSlicR…
+      0.1            65073          4     16268.3      7898.5      1790     47486      21553.4  PushPop   myelin-exec:__myl_AddSqrtDivMulMulAddReshTran_myl0_162                                   
+      0.1            64913          4     16228.3      7129.5       799     49855      23015.4  PushPop   myelin-exec:__myl_MulAddMaxrSubExpSumDivMul_myl0_89                                      
+      0.1            63280          4     15820.0      4164.5      1009     53942      25536.5  PushPop   myelin-exec:__myl_AddMeanSubMulMean_myl0_65                                              
+      0.0            62072          4     15518.0      7585.5       643     46258      21250.1  PushPop   myelin-exec:__myl_MulAddMaxrSubExpSumDivMul_myl0_41                                      
+      0.0            61103          4     15275.8      5600.0       626     49277      22974.3  PushPop   myelin-exec:__myl_Tran_myl0_27                                                           
+      0.0            60771          4     15192.8      7590.5      1495     44095      19875.7  PushPop   myelin-exec:__mye57621+__mye57609+__mye57597_myl0_131                                    
+      0.0            60743          4     15185.8      5554.0      2160     47475      21716.6  PushPop   myelin-exec:/model/encoder/layer.9/attention/self/MatMul_1_myl0_154                      
+      0.0            60685          4     15171.3       705.0       214     59061      29262.3  PushPop   myelin-exec:__mye82988_myl0_118                                                          
+      0.0            60644          4     15161.0      3532.5      1956     51623      24347.0  PushPop   myelin-exec:__myl_AddSqrtDivMulMulAddReshTran_myl0_66                                    
+      0.0            60388          4     15097.0      7116.5      2440     43715      19492.7  PushPop   myelin-exec:/model/encoder/layer.5/attention/output/dense/MatMul_myl0_92                 
+      0.0            59445          4     14861.3      3862.5      1455     50265      23703.3  PushPop   myelin-exec:__myl_MulAddMaxrSubExpSumDivMul_myl0_137                                     
+      0.0            58239          4     14559.8     10910.0      1610     34809      16051.1  PushPop   myelin-exec:__myl_DivErfAddMulMul_myl0_127                                               
+      0.0            58025          4     14506.3      5694.5      2761     43875      19756.7  PushPop   myelin-exec:/model/encoder/layer.4/attention/self/MatMul_myl0_72                         
+      0.0            57531          4     14382.8      3990.5       798     48752      23048.5  PushPop   myelin-exec:__myl_AddMeanSubMulMeanAddSqrtDivMulMulAdd_myl0_173                          
+      0.0            57517          4     14379.3      1130.0       134     55123      27166.6  PushPop   myelin-exec:cast_hvar^83250i64_myl0_7                                                    
+      0.0            57394          4     14348.5      5202.5       752     46237      21505.8  PushPop   myelin-exec:__myl_Tran_myl0_11                                                           
+      0.0            56578          4     14144.5     11816.5      1148     31797      15135.4  PushPop   myelin-exec:__myl_AddMeanSubMulMeanAddSqrtDivMulMulAdd_myl0_29                           
+      0.0            56210          4     14052.5      4294.5       670     46951      22087.8  PushPop   myelin-exec:__myl_Tran_myl0_43                                                           
+      0.0            55627          4     13906.8      5515.5      1995     42601      19374.2  PushPop   myelin-exec:__myl_DivErfAddMulMul_myl0_31                                                
+      0.0            55487          4     13871.8      4868.5       612     45138      21057.0  PushPop   myelin-exec:__myl_MulAddMaxrSubExpSumDivMul_myl0_25                                      
+      0.0            55003          4     13750.8      4159.0       668     46017      21677.1  PushPop   myelin-exec:__myl_MulAddMaxrSubExpSumDivMul_myl0_57                                      
+      0.0            54758          4     13689.5     10336.0      1756     32330      14744.7  PushPop   myelin-exec:__myl_AddSqrtDivMulMulAddReshTran_myl0_34                                    
+      0.0            54673          4     13668.3       815.0       410     52633      25978.7  PushPop   myelin-exec:__mye82969_myl0_116                                                          
+      0.0            53548          4     13387.0       939.5       265     51404      25347.6  PushPop   myelin-exec:__mye83045_myl0_84                                                           
+      0.0            53401          4     13350.3      2877.0       759     46888      22395.8  PushPop   myelin-exec:__myl_MulAddMaxrSubExpSumDivMul_myl0_73                                      
+      0.0            52864          4     13216.0       701.0       124     51338      25417.5  PushPop   myelin-exec:cast_hvar^83136i64_myl0_55                                                   
+      0.0            52839          4     13209.8      3934.5       934     44036      20692.9  PushPop   myelin-exec:__myl_AddMeanSubMulMean_myl0_145                                             
+      0.0            52559          4     13139.8       847.0       382     50483      24897.2  PushPop   myelin-exec:cast_hvar^83003i64_myl0_101                                                  
+      0.0            51277          4     12819.3      1024.0       235     48994      24119.6  PushPop   myelin-exec:cast_hvar^83022i64_myl0_103                                                  
+      0.0            49476          4     12369.0       894.0       507     47181      23210.4  PushPop   myelin-exec:__mye82801_myl0_180                                                          
+      0.0            49414          4     12353.5      7327.0       927     33833      15322.3  PushPop   myelin-exec:__myl_AddMeanSubMulMean_myl0_33                                              
+      0.0            48676          4     12169.0       653.0       228     47142      23318.4  PushPop   myelin-exec:__mye83102_myl0_70                                                           
+      0.0            47129          4     11782.3       776.0       177     45400      22416.0  PushPop   myelin-exec:cast_hvar^83041i64_myl0_85                                                   
+      0.0            46215          4     11553.8       802.5       164     44446      21932.4  PushPop   myelin-exec:cast_hvar^82927i64_myl0_133                                                  
+      0.0            46129          4     11532.3     11660.0      2286     20523       8157.2  PushPop   myelin-exec:/model/encoder/layer.10/attention/self/MatMul_1_myl0_170                     
+      0.0            44334          4     11083.5       822.0       327     42363      20855.9  PushPop   myelin-exec:__mye82931_myl0_132                                                          
+      0.0            43865          4     10966.3       933.5       325     41673      20475.8  PushPop   myelin-exec:cast_hvar^83117i64_myl0_53                                                   
+      0.0            43147          4     10786.8       768.0       135     41476      20466.2  PushPop   myelin-exec:__mye83216_myl0_22                                                           
+      0.0            42492          4     10623.0       706.0       308     40772      20102.1  PushPop   myelin-exec:cast_hvar^82946i64_myl0_135                                                  
+      0.0            40994          4     10248.5       749.5       296     39199      19304.4  PushPop   myelin-exec:__mye83026_myl0_102                                                          
+      0.0            40492          4     10123.0      1128.5       355     37880      18509.7  PushPop   myelin-exec:__mye83007_myl0_100                                                          
+      0.0            40292          4     10073.0       822.5       235     38412      18898.6  PushPop   myelin-exec:cast_hvar^83060i64_myl0_87                                                   
+      0.0            39332          4      9833.0       682.0       203     37765      18625.4  PushPop   myelin-exec:__mye83140_myl0_54                                                           
+      0.0            37915          1     37915.0     37915.0     37915     37915          0.0  StartEnd  myelin-exec:myelinGraphResolveShapes                                                     
+      0.0            36852          4      9213.0       867.5       146     34971      17180.3  PushPop   myelin-exec:__mye82912_myl0_150                                                          
+      0.0            36431          4      9107.8       716.0       173     34826      17150.8  PushPop   myelin-exec:cast_hvar^83098i64_myl0_71                                                   
+      0.0            36353          4      9088.3      4019.0       755     27560      12565.2  PushPop   myelin-exec:__myl_AddMeanSubMulMean_myl0_129                                             
+      0.0            32912          4      8228.0      7570.0      2233     15539       6673.7  PushPop   myelin-exec:/model/encoder/layer.8/attention/output/dense/MatMul_myl0_140                
+      0.0            32367          4      8091.8      5312.5      1688     20054       8494.5  PushPop   myelin-exec:__myl_DivErfAddMulMul_myl0_15                                                
+      0.0            29707          4      7426.8      4919.5       736     19132       8467.5  PushPop   myelin-exec:__myl_AddMeanSubMulMean_myl0_161                                             
+      0.0            27611          4      6902.8      1854.0       222     23681      11221.4  PushPop   myelin-exec:__mye17619_0_myl0_0                                                          
+      0.0            26737          4      6684.3       766.5       316     24888      12142.3  PushPop   myelin-exec:__mye83064_myl0_86                                                           
+      0.0            20789          4      5197.3      4194.0      2601      9800       3234.2  StartEnd  myelin-exec:myelinGraphUnload                                                            
+      0.0            20730          4      5182.5      4282.5       736     11429       4937.1  PushPop   myelin-exec:__myl_Tran_myl0_91                                                           
+      0.0            18945          4      4736.3       901.5       359     16783       8037.4  PushPop   myelin-exec:__mye83121_myl0_52                                                           
+      0.0            18633          4      4658.3      3824.0       719     10266       4324.1  PushPop   myelin-exec:__myl_MulAddMaxrSubExpSumDivMul_myl0_153                                     
+      0.0            16466          4      4116.5       822.0       422     14400       6863.0  PushPop   myelin-exec:cast_hvar^83079i64_myl0_69                                                   
+      0.0            16115          4      4028.8       724.5       141     14525       7011.3  PushPop   myelin-exec:cast_hvar^82851i64_myl0_165                                                  
+      0.0            15950          4      3987.5       767.0       347     14069       6731.7  PushPop   myelin-exec:cast_hvar^82889i64_myl0_149                                                  
+      0.0            15858          4      3964.5       807.5       289     13954       6667.9  PushPop   myelin-exec:cast_hvar^82870i64_myl0_167                                                  
+      0.0            13776          4      3444.0       615.5       225     12320       5924.3  PushPop   myelin-exec:__mye82950_myl0_134                                                          
+      0.0            13437          4      3359.3       756.5       184     11740       5600.3  PushPop   myelin-exec:cast_hvar^83174i64_myl0_39                                                   
+      0.0            11880          4      2970.0      2060.0       171      7589       3272.5  PushPop   myelin-exec:__mye83254_myl0_6                                                            
+      0.0            10899          4      2724.8      1319.0       243      8018       3571.1  PushPop   myelin-exec:__mye83197_myl0_20                                                           
+      0.0            10734          4      2683.5       732.0       161      9109       4305.7  PushPop   myelin-exec:cast_hvar^83212i64_myl0_23                                                   
+      0.0             9788          4      2447.0       976.0       438      7398       3318.5  PushPop   myelin-exec:__mye83083_myl0_68                                                           
+      0.0             9462          4      2365.5       801.5       437      7422       3379.7  PushPop   myelin-exec:__mye82893_myl0_148                                                          
+      0.0             9138          4      2284.5       777.0       250      7334       3384.6  PushPop   myelin-exec:__mye82855_myl0_164                                                          
+      0.0             8770          4      2192.5      1035.5       362      6337       2789.2  PushPop   myelin-exec:__mye83159_myl0_36                                                           
+      0.0             8251          4      2062.8       822.5       222      6384       2924.1  PushPop   myelin-exec:__mye82874_myl0_166                                                          
+      0.0             7438          4      1859.5       925.0       209      5379       2398.3  PushPop   myelin-exec:cast_hvar^83193i64_myl0_21                                                   
+      0.0             7345          4      1836.3       874.5       276      5320       2363.2  PushPop   myelin-exec:cast_hvar^83155i64_myl0_37                                                   
+      0.0             6811          4      1702.8       711.0       154      5235       2394.6  PushPop   myelin-exec:__mye83178_myl0_38                                                           
+      0.0             6431          1      6431.0      6431.0      6431      6431          0.0  StartEnd  :myelinBinaryGraphCreate                                                                 
+      0.0             3547          4       886.8      1004.5       275      1263        455.2  StartEnd  myelin-exec:myelinTensorGetInputMemoryBatch                                              
+      0.0             2327          1      2327.0      2327.0      2327      2327          0.0  StartEnd  myelin-exec:myelinTensorGetMemory                                                        
+      0.0             1745          4       436.3       460.5       185       639        218.1  StartEnd  myelin-exec:myelinTensorGetOutputMemoryBatch                                             
+      0.0             1139          4       284.8       285.0       151       418        114.0  StartEnd  myelin-exec:myelinTensorSetOutputMemoryBatch                                             
+      0.0              885          4       221.3       234.5       150       266         49.8  StartEnd  myelin-exec:myelinTensorSetInputMemoryBatch                                              
+
+[4/8] Executing 'osrt_sum' stats report
+
+ Time (%)  Total Time (ns)  Num Calls    Avg (ns)      Med (ns)     Min (ns)    Max (ns)   StdDev (ns)          Name        
+ --------  ---------------  ---------  ------------  ------------  ----------  ----------  ------------  -------------------
+     59.0      16930522701        178    95115296.1   100153982.5        1682   101000981    20484404.3  poll               
+     21.3       6118859837          3  2039619945.7  3054697962.0      193992  3063967883  1766200766.7  pthread_join       
+     10.7       3075826345          1  3075826345.0  3075826345.0  3075826345  3075826345           0.0  pthread_cond_wait  
+      4.5       1298229196         10   129822919.6        1968.5        1028  1294916115   409373182.9  read               
+      4.2       1205166061     158921        7583.4        2081.0         999     7769111       42149.6  ioctl              
+      0.1         38668216          3    12889405.3      372571.0      226475    38069170    21806438.2  fread              
+      0.0          4168008         38      109684.4        2810.0        1131     1899261      378720.8  fopen              
+      0.0          1060954         24       44206.4        5306.0        1081      826155      167854.8  fclose             
+      0.0          1025550          5      205110.0       12027.0        4730      564013      274555.5  open               
+      0.0           590711          3      196903.7      204087.0       60798      325826      132659.9  sem_timedwait      
+      0.0           528595        126        4195.2        2703.5        1004       29555        4985.8  fflush             
+      0.0           500891          7       71555.9       70525.0       47708       94325       16229.9  pthread_create     
+      0.0           421296         26       16203.7       10233.5        2877      158948       29506.3  mmap               
+      0.0           185353          5       37070.6        4941.0        1094       92233       47580.2  close              
+      0.0           180277         30        6009.2        3498.5        1441       31358        6848.1  fgets              
+      0.0            37361          8        4670.1        4515.0        2743        7488        1816.6  write              
+      0.0            23969          2       11984.5       11984.5        9001       14968        4219.3  connect            
+      0.0            17576          4        4394.0        4107.5        1760        7601        2875.3  pipe2              
+      0.0            15209          6        2534.8        1479.5        1016        7707        2568.1  fwrite             
+      0.0            12095          1       12095.0       12095.0       12095       12095           0.0  pthread_cond_signal
+      0.0            10929          2        5464.5        5464.5        1501        9428        5605.2  socket             
+      0.0             4563          3        1521.0        1598.0        1262        1703         230.4  fcntl              
+
+[5/8] Executing 'cuda_api_sum' stats report
+
+ Time (%)  Total Time (ns)  Num Calls   Avg (ns)    Med (ns)   Min (ns)  Max (ns)  StdDev (ns)                    Name                   
+ --------  ---------------  ---------  ----------  ----------  --------  --------  -----------  -----------------------------------------
+     66.4       4099355464      43367     94527.1       261.0       221   5885383     460707.2  cudaEventSynchronize                     
+     30.6       1887552935       2853    661602.9    315950.0     59051  12114026    1362295.9  cudaGraphLaunch                          
+      0.8         47196124       5718      8254.0      5062.0      1476    184075      11516.0  cudaEventRecord                          
+      0.6         34371736         21   1636749.3     11227.0      2415  34046863    7426108.7  cudaMemcpyAsync                          
+      0.5         28489950          2  14244975.0  14244975.0   9513788  18976162    6690908.8  cudaProfilerStop                         
+      0.3         17241681         16   1077605.1      3665.0       643  15693403    3909579.6  cudaStreamCreate                         
+      0.3         17215118         18    956395.4     23188.0     13230  16448084    3866986.4  cuModuleUnload                           
+      0.2         12026000          1  12026000.0  12026000.0  12026000  12026000          0.0  cudaMallocAsync                          
+      0.1          6825575        792      8618.2      1492.0       119    177335      15723.4  cuEventRecordWithFlags                   
+      0.1          5805092         18    322505.1     11654.5       373   3974928     959891.3  cudaStreamSynchronize                    
+      0.1          4907481        488     10056.3      3599.0       248    145516      16684.8  cuLaunchKernelEx                         
+      0.0          2715674          2   1357837.0   1357837.0   1063266   1652408     416586.3  cudaGraphInstantiate                     
+      0.0          2426315         14    173308.2    129159.0     98801    700991     156908.6  cuModuleLoadData                         
+      0.0          1801203        104     17319.3      5072.5       262    491313      49979.6  cuLaunchKernel                           
+      0.0          1447620          6    241270.0      4150.0      1026   1040132     421918.5  cudaMalloc                               
+      0.0          1266203          4    316550.8      3238.0      2016   1257711     627440.9  cudaMallocHost                           
+      0.0           953252          4    238313.0    241325.0    219798    250804      14121.6  cuModuleLoadFatBinary                    
+      0.0           921841          9    102426.8      4548.0       547    492849     192496.1  cudaFree                                 
+      0.0           799614         99      8076.9      3891.0       186     52546      13278.2  cudaMemsetAsync                          
+      0.0           760259        582      1306.3       884.5       145     31586       2946.5  cudaStreamIsCapturing                    
+      0.0           512202          2    256101.0    256101.0    158266    353936     138359.6  cudaGraphExecDestroy                     
+      0.0           498569        789       631.9       238.0       110     61593       3376.6  cuEventCreate                            
+      0.0           469673          4    117418.3      5688.0      1402    456895     226342.4  cudaFreeHost                             
+      0.0           234610        789       297.4       242.0       109      9297        411.5  cuEventDestroy_v2                        
+      0.0           215793          3     71931.0     43979.0     41748    130066      50358.7  cuMemcpyAsync                            
+      0.0           190179          2     95089.5     95089.5     28029    162150      94837.9  cudaGraphDestroy                         
+      0.0           137663          2     68831.5     68831.5     12752    124911      79308.4  cudaLaunchHostFunc                       
+      0.0           125009        394       317.3       302.5       203      6318        319.3  cuEventSynchronize                       
+      0.0            73974         16      4623.4      2296.0       352     15660       4767.5  cudaStreamDestroy                        
+      0.0            57758        479       120.6        80.0        51      1174        117.3  cuGetProcAddress_v2                      
+      0.0            45140         30      1504.7       396.0       175     16551       3217.6  cudaEventCreateWithFlags                 
+      0.0            45029         30      1501.0       326.0       118     12746       2920.4  cudaEventDestroy                         
+      0.0            42707          1     42707.0     42707.0     42707     42707          0.0  cuLibraryUnload                          
+      0.0            34751          3     11583.7      2565.0       301     31885      17617.9  cuStreamSynchronize                      
+      0.0            34457          3     11485.7      1492.0       802     32163      17910.4  cuStreamDestroy_v2                       
+      0.0            21756         12      1813.0      1069.0       480      4842       1493.2  cudaStreamWaitEvent                      
+      0.0            18952          2      9476.0      9476.0      8634     10318       1190.8  cudaStreamBeginCapture                   
+      0.0            15735          2      7867.5      7867.5      2842     12893       7107.1  cudaStreamEndCapture                     
+      0.0            15185         51       297.7       210.0       182      2603        400.2  cudaOccupancyMaxActiveClusters           
+      0.0            12437          1     12437.0     12437.0     12437     12437          0.0  cudaDeviceSynchronize                    
+      0.0             8722          3      2907.3      1466.0      1011      6245       2899.4  cuStreamCreate                           
+      0.0             8629          2      4314.5      4314.5      2599      6030       2426.1  cudaProfilerStart                        
+      0.0             6419          3      2139.7      1009.0       928      4482       2028.9  cudaGetDeviceProperties                  
+      0.0             6021          1      6021.0      6021.0      6021      6021          0.0  cudaFreeAsync                            
+      0.0             5796          3      1932.0      2674.0       277      2845       1435.8  cudaOccupancyAvailableDynamicSMemPerBlock
+      0.0             5029          3      1676.3       285.0       267      4477       2425.5  cuModuleGetLoadingMode                   
+      0.0             3857          1      3857.0      3857.0      3857      3857          0.0  cuCtxSetCurrent                          
+      0.0             3353          4       838.3       729.5       342      1552        594.8  cuStreamGetGreenCtx                      
+      0.0             2415          1      2415.0      2415.0      2415      2415          0.0  cuInit                                   
+      0.0              493          2       246.5       246.5       204       289         60.1  cuStreamIsCapturing                      
+
+[6/8] Executing 'cuda_gpu_kern_sum' stats report
+
+ Time (%)  Total Time (ns)  Instances  Avg (ns)  Med (ns)  Min (ns)  Max (ns)  StdDev (ns)                                                  Name                                                
+ --------  ---------------  ---------  --------  --------  --------  --------  -----------  ----------------------------------------------------------------------------------------------------
+     68.2          1790562         96   18651.7   17457.0      3552    260048      26269.4  sm80_xmma_gemm_f32f32_tf32f32_f32_tn_n_tilesize64x128x16_stage4_warpsize2x2x1_tensor16x8x8_execute_…
+     18.4           482335         24   20097.3   20082.0     19969     20289         92.6  sm80_xmma_gemm_f32f32_tf32f32_f32_nn_n_tilesize128x64x16_stage6_warpsize2x2x1_tensor16x8x8_execute_…
+      4.0           104679         24    4361.6    4368.5      4320      4385         26.0  sm80_xmma_gemm_f32f32_f32f32_f32_nn_n_tilesize32x64x8_stage3_warpsize1x2x1_ffma_aligna4_alignc4_exe…
+      2.0            52962         24    2206.8    2128.0      2048      2496        168.6  __myl_AddMeanSubMulMeanAddSqrtDivMulMulAdd_0xc63f2b50d032feecbe5e955b458cbc8d_vec                   
+      1.5            38369         24    1598.7    1536.0      1472      1920        121.0  __myl_AddSqrtDivMulMulAddReshTran_0x2d6bd7854f18f5293a8e28a292291cf4_vec                            
+      1.4            36193         24    1508.0    1504.0      1472      1537         14.4  __myl_DivErfAddMulMul_0xe895862f7e0e970fb3688f6175b5281a_vec                                        
+      1.4            36001         24    1500.0    1504.0      1440      1536         27.2  __myl_AddMeanSubMulMean_0x145764d8c4a19d69b8c1530b1fe9033a_vec                                      
+      1.2            30914         22    1405.2    1408.0      1376      1440         19.5  __myl_MulAddMaxrSubExpSumDivMul_0x0229c798f443c91c84d9d01230220b68_vec                              
+      0.7            19008         24     792.0     800.0       768       928         33.0  __myl_Tran_0x29a46e689fc604a15d90e31e8353cb4c_vec                                                   
+      0.4            11649          2    5824.5    5824.5      5824      5825          0.7  sm80_xmma_gemm_f32f32_tf32f32_f32_nn_n_tilesize32x32x64_stage3_warpsize2x1x2_tensor16x8x8_execute_k…
+      0.4             9888          2    4944.0    4944.0      4384      5504        792.0  __myl_CastGathCastReplGathGathReshReshAddReshGathAddReshMeanSubMulMean_0x72ca3a0f8b3c3eb357cde2395e…
+      0.3             8768          2    4384.0    4384.0      4000      4768        543.1  __myl_CastReshIotaCastReshReshEqlGtrOrIotaCastReshMulAddCastGathReshAndSlicReplSeleMulAddMaxrSubEtc…
+      0.1             3072          2    1536.0    1536.0      1536      1536          0.0  __myl_AddSqrtDivMulMulAddReshSlic_0x08431f52196e9b4026f893c2f3983e84_vec                            
+      0.1             1376          2     688.0     688.0       672       704         22.6  __myl_Tanh_0xc92d99d5b32b0be46813347d81116493                                                       
+
+[7/8] Executing 'cuda_gpu_mem_time_sum' stats report
+
+ Time (%)  Total Time (ns)  Count  Avg (ns)   Med (ns)  Min (ns)  Max (ns)  StdDev (ns)           Operation          
+ --------  ---------------  -----  ---------  --------  --------  --------  -----------  ----------------------------
+     98.9         33824119     13  2601855.3    1536.0       896  33806837    9375930.1  [CUDA memcpy Host-to-Device]
+      1.0           331059     50     6621.2     416.0       288    249039      35977.6  [CUDA memset]               
+      0.2            56740     11     5158.2    1664.0      1024     11681       4920.0  [CUDA memcpy Device-to-Host]
+
+[8/8] Executing 'cuda_gpu_mem_size_sum' stats report
+
+ Total (MB)  Count  Avg (MB)  Med (MB)  Min (MB)  Max (MB)  StdDev (MB)           Operation          
+ ----------  -----  --------  --------  --------  --------  -----------  ----------------------------
+    578.485     50    11.570     0.000     0.000   437.935       64.657  [CUDA memset]               
+    437.948     13    33.688     0.001     0.001   437.935      121.461  [CUDA memcpy Host-to-Device]
+      1.585     11     0.144     0.003     0.000     0.393        0.198  [CUDA memcpy Device-to-Host]
+
+Generated:
+	/mnt/d/Samruddhi/FuseRT/RTX5090/results/nsys_optimized_b1.nsys-rep
+	/mnt/d/Samruddhi/FuseRT/RTX5090/results/nsys_optimized_b1.sqlite

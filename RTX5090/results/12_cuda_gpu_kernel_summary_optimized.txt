@@ -1,0 +1,26 @@
+
+NOTICE: Existing SQLite export found: results/nsys_optimized_b1.sqlite
+        It is assumed file was previously exported from: results/nsys_optimized_b1.nsys-rep
+        Consider using --force-export=true if needed.
+
+Processing [results/nsys_optimized_b1.sqlite] with [/opt/nvidia/nsight-systems/2026.5.2/target-linux-x64/reports/cuda_gpu_kern_sum.py]... 
+
+ ** CUDA GPU Kernel Summary (cuda_gpu_kern_sum):
+
+ Time (%)  Total Time (ns)  Instances  Avg (ns)  Med (ns)  Min (ns)  Max (ns)  StdDev (ns)                                                  Name                                                
+ --------  ---------------  ---------  --------  --------  --------  --------  -----------  ----------------------------------------------------------------------------------------------------
+     68.2          1790562         96   18651.7   17457.0      3552    260048      26269.4  sm80_xmma_gemm_f32f32_tf32f32_f32_tn_n_tilesize64x128x16_stage4_warpsize2x2x1_tensor16x8x8_execute_…
+     18.4           482335         24   20097.3   20082.0     19969     20289         92.6  sm80_xmma_gemm_f32f32_tf32f32_f32_nn_n_tilesize128x64x16_stage6_warpsize2x2x1_tensor16x8x8_execute_…
+      4.0           104679         24    4361.6    4368.5      4320      4385         26.0  sm80_xmma_gemm_f32f32_f32f32_f32_nn_n_tilesize32x64x8_stage3_warpsize1x2x1_ffma_aligna4_alignc4_exe…
+      2.0            52962         24    2206.8    2128.0      2048      2496        168.6  __myl_AddMeanSubMulMeanAddSqrtDivMulMulAdd_0xc63f2b50d032feecbe5e955b458cbc8d_vec                   
+      1.5            38369         24    1598.7    1536.0      1472      1920        121.0  __myl_AddSqrtDivMulMulAddReshTran_0x2d6bd7854f18f5293a8e28a292291cf4_vec                            
+      1.4            36193         24    1508.0    1504.0      1472      1537         14.4  __myl_DivErfAddMulMul_0xe895862f7e0e970fb3688f6175b5281a_vec                                        
+      1.4            36001         24    1500.0    1504.0      1440      1536         27.2  __myl_AddMeanSubMulMean_0x145764d8c4a19d69b8c1530b1fe9033a_vec                                      
+      1.2            30914         22    1405.2    1408.0      1376      1440         19.5  __myl_MulAddMaxrSubExpSumDivMul_0x0229c798f443c91c84d9d01230220b68_vec                              
+      0.7            19008         24     792.0     800.0       768       928         33.0  __myl_Tran_0x29a46e689fc604a15d90e31e8353cb4c_vec                                                   
+      0.4            11649          2    5824.5    5824.5      5824      5825          0.7  sm80_xmma_gemm_f32f32_tf32f32_f32_nn_n_tilesize32x32x64_stage3_warpsize2x1x2_tensor16x8x8_execute_k…
+      0.4             9888          2    4944.0    4944.0      4384      5504        792.0  __myl_CastGathCastReplGathGathReshReshAddReshGathAddReshMeanSubMulMean_0x72ca3a0f8b3c3eb357cde2395e…
+      0.3             8768          2    4384.0    4384.0      4000      4768        543.1  __myl_CastReshIotaCastReshReshEqlGtrOrIotaCastReshMulAddCastGathReshAndSlicReplSeleMulAddMaxrSubEtc…
+      0.1             3072          2    1536.0    1536.0      1536      1536          0.0  __myl_AddSqrtDivMulMulAddReshSlic_0x08431f52196e9b4026f893c2f3983e84_vec                            
+      0.1             1376          2     688.0     688.0       672       704         22.6  __myl_Tanh_0xc92d99d5b32b0be46813347d81116493                                                       
+

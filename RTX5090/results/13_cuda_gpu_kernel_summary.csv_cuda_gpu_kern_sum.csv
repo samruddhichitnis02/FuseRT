@@ -1,0 +1,16 @@
+Time (%),Total Time (ns),Instances,Avg (ns),Med (ns),Min (ns),Max (ns),StdDev (ns),Name
+55.4,1431724,70,20453.2,20241.0,14209,27010,4969.0,sm80_xmma_gemm_f32f32_tf32f32_f32_tn_n_tilesize64x128x16_stage4_warpsize2x2x1_tensor16x8x8_execute_kernel_trt
+24.0,619394,48,12904.0,12865.0,5632,20353,7330.0,sm86_xmma_gemm_f32f32_tf32f32_f32_nn_n_tilesize128x64x64_stage2_warpsize2x2x1_tensor16x8x8_execute_kernel_trt
+8.2,210857,24,8785.7,8544.0,8512,14113,1136.1,sm80_xmma_gemm_f32f32_tf32f32_f32_tn_n_tilesize128x128x16_stage4_warpsize2x2x1_tensor16x8x8_aligna4_alignc4_execute_kernel_trt
+3.0,77028,2,38514.0,38514.0,38498,38530,22.6,sm86_xmma_gemm_f32f32_tf32f32_f32_tn_n_tilesize128x128x16_stage3_warpsize2x2x1_tensor16x8x8_execute_kernel_trt
+2.0,52902,24,2204.3,2112.0,2048,2624,188.0,__myl_AddMeanSubMulMeanAddSqrtDivMulMulAdd_0xc63f2b50d032feecbe5e955b458cbc8d_vec
+1.5,38944,24,1622.7,1584.0,1504,1920,118.0,__myl_AddSqrtDivMulMulAddReshTran_0x2d6bd7854f18f5293a8e28a292291cf4_vec
+1.4,36005,24,1500.2,1504.0,1472,1536,17.1,__myl_DivErfAddMulMul_0xe895862f7e0e970fb3688f6175b5281a_vec
+1.4,35715,24,1488.1,1504.0,1408,1536,29.7,__myl_AddMeanSubMulMean_0x145764d8c4a19d69b8c1530b1fe9033a_vec
+1.2,31233,22,1419.7,1408.0,1376,1537,32.2,__myl_MulAddMaxrSubExpSumDivMul_0x0229c798f443c91c84d9d01230220b68_vec
+0.7,18723,24,780.1,768.0,768,801,15.8,__myl_Tran_0x29a46e689fc604a15d90e31e8353cb4c_vec
+0.4,10433,2,5216.5,5216.5,4416,6017,1132.1,__myl_CastGathGathCastReplGathGathReshReshAddReshAddReshMeanSubMulMean_0x72ca3a0f8b3c3eb357cde2395e725db8
+0.4,9633,2,4816.5,4816.5,4737,4896,112.4,sm86_xmma_gemm_f32f32_tf32f32_f32_tn_n_tilesize32x32x64_stage6_warpsize2x2x1_tensor16x8x8_execute_kernel_trt
+0.3,8224,2,4112.0,4112.0,3968,4256,203.6,__myl_CastReshIotaCastReshReshEqlGtrOrIotaCastReshMulAddCastGathReshAndSlicReplSeleMulAddMaxrSubEtc_0xea5e8c875a47c8d08b1513e5ffff9263
+0.1,3169,2,1584.5,1584.5,1536,1633,68.6,__myl_AddSqrtDivMulMulAddReshSlic_0x08431f52196e9b4026f893c2f3983e84_vec
+0.1,1408,2,704.0,704.0,704,704,0.0,__myl_Tanh_0xc92d99d5b32b0be46813347d81116493
