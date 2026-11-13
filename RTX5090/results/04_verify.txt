@@ -1,0 +1,4 @@
+batch=1 seq=128 padded=False  max_abs_err=1.57e-05  PASS
+batch=4 seq=64 padded=False  max_abs_err=8.58e-06  PASS
+batch=8 seq=256 padded=False  max_abs_err=2.19e-05  PASS
+batch=4 seq=128 padded=True  max_abs_err=8.94e-06  PASS

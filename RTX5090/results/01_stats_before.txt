@@ -1,0 +1,35 @@
+total nodes: 1231
+weights (initializers): 199
+inputs: ['input_ids', 'attention_mask']
+outputs: ['last_hidden_state', 'pooler_output']
+
+Constant                    348
+Add                         173
+Unsqueeze                   112
+MatMul                      96
+Mul                         65
+Reshape                     53
+Concat                      52
+ReduceMean                  50
+Transpose                   48
+Div                         37
+Gather                      34
+Shape                       33
+Sub                         25
+Pow                         25
+Sqrt                        25
+Softmax                     12
+Erf                         12
+Cast                        6
+ConstantOfShape             4
+Where                       4
+Equal                       3
+Expand                      3
+Range                       3
+And                         2
+Slice                       1
+GatherElements              1
+GreaterOrEqual              1
+Flatten                     1
+Gemm                        1
+Tanh                        1

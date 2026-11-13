@@ -1,0 +1,31 @@
+[11/12/2026-21:16:34] [TRT] [I] [MemUsageChange] Init CUDA: CPU +43, GPU +0, now: CPU 53, GPU 1679 (MiB)
+[11/12/2026-21:16:36] [TRT] [I] ----------------------------------------------------------------
+[11/12/2026-21:16:36] [TRT] [I] Input filename:   models/bert.onnx
+[11/12/2026-21:16:36] [TRT] [I] ONNX IR version:  0.0.8
+[11/12/2026-21:16:36] [TRT] [I] Opset version:    16
+[11/12/2026-21:16:36] [TRT] [I] Producer name:    pytorch
+[11/12/2026-21:16:36] [TRT] [I] Producer version: 2.15.0
+[11/12/2026-21:16:36] [TRT] [I] Domain:           
+[11/12/2026-21:16:36] [TRT] [I] Model version:    0
+[11/12/2026-21:16:36] [TRT] [I] Doc string:       
+[11/12/2026-21:16:36] [TRT] [I] ----------------------------------------------------------------
+[11/12/2026-21:16:36] [TRT] [W] ModelImporter.cpp:826: Make sure input input_ids has Int64 binding.
+[11/12/2026-21:16:36] [TRT] [W] ModelImporter.cpp:826: Make sure input attention_mask has Int64 binding.
+[11/12/2026-21:16:36] [TRT] [I] In input (input_ids), minShape is not the same as maxShape.
+[11/12/2026-21:16:37] [TRT] [I] [MemUsageChange] Init builder kernel library: CPU +294, GPU +4, now: CPU 971, GPU 1683 (MiB)
+[11/12/2026-21:16:37] [TRT] [I] Local timing cache in use. Profiling results in this builder pass will not be stored.
+[11/12/2026-21:16:37] [TRT] [I] Compiler backend is used during engine build.
+[11/12/2026-21:16:44] [TRT] [I] Detected 2 inputs and 2 output network tensors.
+[11/12/2026-21:16:44] [TRT] [I] Total Host Persistent Memory: 80 bytes
+[11/12/2026-21:16:44] [TRT] [I] Total Device Persistent Memory: 0 bytes
+[11/12/2026-21:16:44] [TRT] [I] Max Scratch Memory: 140538368 bytes
+[11/12/2026-21:16:44] [TRT] [I] [BlockAssignment] Started assigning block shifts. This will take 1 steps to complete.
+[11/12/2026-21:16:44] [TRT] [I] [BlockAssignment] Algorithm ShiftNTopDown took 0.003979ms to assign 1 blocks to 1 nodes requiring 140538368 bytes.
+[11/12/2026-21:16:44] [TRT] [I] Total Activation Memory: 140538368 bytes
+[11/12/2026-21:16:44] [TRT] [I] Total Weights Memory: 437935232 bytes
+[11/12/2026-21:16:44] [TRT] [I] Compiler backend is used during engine execution.
+[11/12/2026-21:16:44] [TRT] [I] Engine generation completed in 7.0756 seconds.
+[11/12/2026-21:16:44] [TRT] [I] [MemUsageStats] Peak memory usage of TRT CPU/GPU memory allocators: CPU 0 MiB, GPU 417 MiB
+[11/12/2026-21:16:46] [TRT] [I] Loaded engine size: 418 MiB
+build time 7.8s, engine size 439.0 MB
+layers in engine: 197

@@ -1,0 +1,11 @@
+start: 1231 nodes
+inline_constants            1231 -> 883
+remove_identity             883 -> 883
+  fused 25 LayerNorm groups
+fuse_layernorm              883 -> 683
+  fused 12 GELU groups
+fuse_gelu                   683 -> 635
+  fused 12 QKV groups
+merge_qkv                   635 -> 599
+dead_code_elimination       599 -> 599
+saved models/bert_opt.onnx

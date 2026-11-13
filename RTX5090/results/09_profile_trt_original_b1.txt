@@ -1,0 +1,29 @@
+engine: models/bert_fp32.plan   batch=1   seq=128   iterations=100
+layers profiled: 197   names matched to layer file: 197
+sum of layer times: 3.681 ms
+
+layer type        count   total ms    share
+gemm                 73      2.371    64.4%
+kgen                 75      0.977    26.5%
+reshape              24      0.191     5.2%
+cast                 24      0.138     3.8%
+shape_call            1      0.004     0.1%
+
+slowest 15 layers:
+  0.0533 ms    1.4%  gemm     /model/encoder/layer.0/attention/self/value/MatMul+/model/encoder/layer.0/attention/self/k
+  0.0463 ms    1.3%  gemm     /model/encoder/layer.5/output/dense/MatMul_myl0_96
+  0.0453 ms    1.2%  gemm     /model/encoder/layer.1/output/dense/MatMul_myl0_32
+  0.0443 ms    1.2%  gemm     /model/encoder/layer.0/output/dense/MatMul_myl0_16
+  0.0442 ms    1.2%  gemm     /model/encoder/layer.4/output/dense/MatMul_myl0_80
+  0.0421 ms    1.1%  gemm     /model/encoder/layer.2/output/dense/MatMul_myl0_48
+  0.0420 ms    1.1%  gemm     /model/encoder/layer.0/attention/self/MatMul_myl0_8
+  0.0416 ms    1.1%  gemm     /model/encoder/layer.3/output/dense/MatMul_myl0_64
+  0.0415 ms    1.1%  gemm     /model/encoder/layer.10/output/dense/MatMul_myl0_176
+  0.0414 ms    1.1%  gemm     /model/encoder/layer.11/output/dense/MatMul_myl0_192
+  0.0404 ms    1.1%  gemm     /model/encoder/layer.8/output/dense/MatMul_myl0_144
+  0.0401 ms    1.1%  gemm     /model/encoder/layer.6/output/dense/MatMul_myl0_112
+  0.0400 ms    1.1%  gemm     /model/encoder/layer.9/output/dense/MatMul_myl0_160
+  0.0394 ms    1.1%  gemm     /model/encoder/layer.7/output/dense/MatMul_myl0_128
+  0.0357 ms    1.0%  gemm     /model/encoder/layer.7/attention/output/dense/MatMul_myl0_124
+
+saved results/profile_original_b1.json

@@ -1,0 +1,65 @@
+ONNX model: models/bert_opt.onnx
+attention matches: 12
+skipped softmax nodes: 0
+
+attention block 0
+  Q x K^T:     /model/encoder/layer.0/attention/self/MatMul
+  Softmax:     /model/encoder/layer.0/attention/self/Softmax
+  scores x V:  /model/encoder/layer.0/attention/self/MatMul_1
+
+attention block 1
+  Q x K^T:     /model/encoder/layer.1/attention/self/MatMul
+  Softmax:     /model/encoder/layer.1/attention/self/Softmax
+  scores x V:  /model/encoder/layer.1/attention/self/MatMul_1
+
+attention block 2
+  Q x K^T:     /model/encoder/layer.2/attention/self/MatMul
+  Softmax:     /model/encoder/layer.2/attention/self/Softmax
+  scores x V:  /model/encoder/layer.2/attention/self/MatMul_1
+
+attention block 3
+  Q x K^T:     /model/encoder/layer.3/attention/self/MatMul
+  Softmax:     /model/encoder/layer.3/attention/self/Softmax
+  scores x V:  /model/encoder/layer.3/attention/self/MatMul_1
+
+attention block 4
+  Q x K^T:     /model/encoder/layer.4/attention/self/MatMul
+  Softmax:     /model/encoder/layer.4/attention/self/Softmax
+  scores x V:  /model/encoder/layer.4/attention/self/MatMul_1
+
+attention block 5
+  Q x K^T:     /model/encoder/layer.5/attention/self/MatMul
+  Softmax:     /model/encoder/layer.5/attention/self/Softmax
+  scores x V:  /model/encoder/layer.5/attention/self/MatMul_1
+
+attention block 6
+  Q x K^T:     /model/encoder/layer.6/attention/self/MatMul
+  Softmax:     /model/encoder/layer.6/attention/self/Softmax
+  scores x V:  /model/encoder/layer.6/attention/self/MatMul_1
+
+attention block 7
+  Q x K^T:     /model/encoder/layer.7/attention/self/MatMul
+  Softmax:     /model/encoder/layer.7/attention/self/Softmax
+  scores x V:  /model/encoder/layer.7/attention/self/MatMul_1
+
+attention block 8
+  Q x K^T:     /model/encoder/layer.8/attention/self/MatMul
+  Softmax:     /model/encoder/layer.8/attention/self/Softmax
+  scores x V:  /model/encoder/layer.8/attention/self/MatMul_1
+
+attention block 9
+  Q x K^T:     /model/encoder/layer.9/attention/self/MatMul
+  Softmax:     /model/encoder/layer.9/attention/self/Softmax
+  scores x V:  /model/encoder/layer.9/attention/self/MatMul_1
+
+attention block 10
+  Q x K^T:     /model/encoder/layer.10/attention/self/MatMul
+  Softmax:     /model/encoder/layer.10/attention/self/Softmax
+  scores x V:  /model/encoder/layer.10/attention/self/MatMul_1
+
+attention block 11
+  Q x K^T:     /model/encoder/layer.11/attention/self/MatMul
+  Softmax:     /model/encoder/layer.11/attention/self/Softmax
+  scores x V:  /model/encoder/layer.11/attention/self/MatMul_1
+
+saved JSON results to results/attention_pattern_matches.json
